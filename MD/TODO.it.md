@@ -14,7 +14,7 @@
 
 ---
 
-## 📊 Fasi di Sviluppo
+## 📊 Task e Fasi di Sviluppo
 
 ### **Fase 1: Funzionalità Core (v1.0.0)** - ✅ COMPLETATA
 

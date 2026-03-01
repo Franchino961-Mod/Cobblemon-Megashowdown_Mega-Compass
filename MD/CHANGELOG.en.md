@@ -2,11 +2,14 @@
 
 All notable changes to the **Meteorite Compass** mod will be documented in this file.
 
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
 ---
 
 ## [Unreleased]
 
-### Planned Features (v1.1.0+)
+### Planned
 - JSON configuration system
 - Visited structure tracking
 - Compass needle animation with ItemPropertyFunction

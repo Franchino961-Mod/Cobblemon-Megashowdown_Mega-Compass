@@ -7,6 +7,8 @@
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Build](https://img.shields.io/badge/Build-Passing-brightgreen.svg)](build/libs/)
 
+> 📜 **Changelog**: Vedi [CHANGELOG.it.md](CHANGELOG.it.md) per tutti gli aggiornamenti e modifiche.
+
 ---
 
 ## 📖 Panoramica
@@ -15,7 +17,9 @@
 
 Stanco di scavare a caso sperando di trovare meteoriti? Questa mod aggiunge una bussola craftabile che **punta direttamente al meteorite più vicino**, rendendo l'esplorazione mirata e gratificante.
 
-### ✨ Caratteristiche Principali
+---
+
+## ✨ Caratteristiche Principali
 
 - 🧭 **Navigazione Intelligente**: Punta al Megaroid o Mega Site più vicino
 - 🎯 **Due Tipi di Strutture**: Trova meteoriti sia profondi che superficiali
@@ -23,6 +27,24 @@ Stanco di scavare a caso sperando di trovare meteoriti? Questa mod aggiunge una 
 - 📊 **Display HUD**: Visualizzazione in tempo reale del progresso della ricerca e della distanza
 - 🌐 **Multi-Lingua**: Supporta IT e EN
 - ⚡ **Ottimizzato**: Sistema worker che garantisce prestazioni fluide del server
+
+---
+
+## 📋 Requisiti
+
+- **Minecraft**: 1.21.1
+- **Fabric Loader**: 0.16.9 o superiore
+- **Fabric API**: 0.108.0 o superiore
+- **CobblemonMegaShowdown**: 1.0.0 o superiore
+
+---
+
+## 📦 Installazione
+
+1. Assicurati di avere installato Fabric Loader, Fabric API e CobblemonMegaShowdown
+2. Scarica il file `.jar` della mod
+3. Posiziona il file nella cartella `mods` della tua installazione di Minecraft
+4. Avvia il gioco!
 
 ---
 

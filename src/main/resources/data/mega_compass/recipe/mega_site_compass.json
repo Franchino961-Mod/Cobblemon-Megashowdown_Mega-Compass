@@ -1,0 +1,27 @@
+{
+  "type": "crafting_shaped",
+  "group": "tools",
+  "pattern": [
+    "IAI",
+    "GCG",
+    "IAI"
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "A": {
+      "item": "minecraft:amethyst_shard"
+    },
+    "G": {
+      "item": "minecraft:glowstone_dust"
+    },
+    "C": {
+      "item": "minecraft:compass"
+    }
+  },
+  "result": {
+    "id": "mega_compass:mega_site_compass",
+    "count": 1
+  }
+}

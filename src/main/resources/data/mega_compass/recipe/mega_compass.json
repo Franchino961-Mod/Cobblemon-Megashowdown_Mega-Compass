@@ -1,0 +1,19 @@
+{
+  "type": "crafting_shapeless",
+  "group": "tools",
+  "ingredients": [
+    {
+      "item": "mega_compass:mega_site_compass"
+    },
+    {
+      "item": "mega_compass:megaroid_compass"
+    },
+    {
+      "item": "mega_compass:wishing_weald_compass"
+    }
+  ],
+  "result": {
+    "id": "mega_compass:mega_compass",
+    "count": 1
+  }
+}

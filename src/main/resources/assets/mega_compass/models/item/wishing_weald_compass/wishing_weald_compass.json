@@ -1,0 +1,197 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "mega_compass:item/wishing_weald_compass/wishing_weald_compass_00"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "mega_compass:compass_angle": 0.03125
+      },
+      "model": "mega_compass:item/wishing_weald_compass/wishing_weald_compass_01"
+    },
+    {
+      "predicate": {
+        "mega_compass:compass_angle": 0.0625
+      },
+      "model": "mega_compass:item/wishing_weald_compass/wishing_weald_compass_02"
+    },
+    {
+      "predicate": {
+        "mega_compass:compass_angle": 0.09375
+      },
+      "model": "mega_compass:item/wishing_weald_compass/wishing_weald_compass_03"
+    },
+    {
+      "predicate": {
+        "mega_compass:compass_angle": 0.125
+      },
+      "model": "mega_compass:item/wishing_weald_compass/wishing_weald_compass_04"
+    },
+    {
+      "predicate": {
+        "mega_compass:compass_angle": 0.15625
+      },
+      "model": "mega_compass:item/wishing_weald_compass/wishing_weald_compass_05"
+    },
+    {
+      "predicate": {
+        "mega_compass:compass_angle": 0.1875
+      },
+      "model": "mega_compass:item/wishing_weald_compass/wishing_weald_compass_06"
+    },
+    {
+      "predicate": {
+        "mega_compass:compass_angle": 0.21875
+      },
+      "model": "mega_compass:item/wishing_weald_compass/wishing_weald_compass_07"
+    },
+    {
+      "predicate": {
+        "mega_compass:compass_angle": 0.25
+      },
+      "model": "mega_compass:item/wishing_weald_compass/wishing_weald_compass_08"
+    },
+    {
+      "predicate": {
+        "mega_compass:compass_angle": 0.28125
+      },
+      "model": "mega_compass:item/wishing_weald_compass/wishing_weald_compass_09"
+    },
+    {
+      "predicate": {
+        "mega_compass:compass_angle": 0.3125
+      },
+      "model": "mega_compass:item/wishing_weald_compass/wishing_weald_compass_10"
+    },
+    {
+      "predicate": {
+        "mega_compass:compass_angle": 0.34375
+      },
+      "model": "mega_compass:item/wishing_weald_compass/wishing_weald_compass_11"
+    },
+    {
+      "predicate": {
+        "mega_compass:compass_angle": 0.375
+      },
+      "model": "mega_compass:item/wishing_weald_compass/wishing_weald_compass_12"
+    },
+    {
+      "predicate": {
+        "mega_compass:compass_angle": 0.40625
+      },
+      "model": "mega_compass:item/wishing_weald_compass/wishing_weald_compass_13"
+    },
+    {
+      "predicate": {
+        "mega_compass:compass_angle": 0.4375
+      },
+      "model": "mega_compass:item/wishing_weald_compass/wishing_weald_compass_14"
+    },
+    {
+      "predicate": {
+        "mega_compass:compass_angle": 0.46875
+      },
+      "model": "mega_compass:item/wishing_weald_compass/wishing_weald_compass_15"
+    },
+    {
+      "predicate": {
+        "mega_compass:compass_angle": 0.5
+      },
+      "model": "mega_compass:item/wishing_weald_compass/wishing_weald_compass_16"
+    },
+    {
+      "predicate": {
+        "mega_compass:compass_angle": 0.53125
+      },
+      "model": "mega_compass:item/wishing_weald_compass/wishing_weald_compass_17"
+    },
+    {
+      "predicate": {
+        "mega_compass:compass_angle": 0.5625
+      },
+      "model": "mega_compass:item/wishing_weald_compass/wishing_weald_compass_18"
+    },
+    {
+      "predicate": {
+        "mega_compass:compass_angle": 0.59375
+      },
+      "model": "mega_compass:item/wishing_weald_compass/wishing_weald_compass_19"
+    },
+    {
+      "predicate": {
+        "mega_compass:compass_angle": 0.625
+      },
+      "model": "mega_compass:item/wishing_weald_compass/wishing_weald_compass_20"
+    },
+    {
+      "predicate": {
+        "mega_compass:compass_angle": 0.65625
+      },
+      "model": "mega_compass:item/wishing_weald_compass/wishing_weald_compass_21"
+    },
+    {
+      "predicate": {
+        "mega_compass:compass_angle": 0.6875
+      },
+      "model": "mega_compass:item/wishing_weald_compass/wishing_weald_compass_22"
+    },
+    {
+      "predicate": {
+        "mega_compass:compass_angle": 0.71875
+      },
+      "model": "mega_compass:item/wishing_weald_compass/wishing_weald_compass_23"
+    },
+    {
+      "predicate": {
+        "mega_compass:compass_angle": 0.75
+      },
+      "model": "mega_compass:item/wishing_weald_compass/wishing_weald_compass_24"
+    },
+    {
+      "predicate": {
+        "mega_compass:compass_angle": 0.78125
+      },
+      "model": "mega_compass:item/wishing_weald_compass/wishing_weald_compass_25"
+    },
+    {
+      "predicate": {
+        "mega_compass:compass_angle": 0.8125
+      },
+      "model": "mega_compass:item/wishing_weald_compass/wishing_weald_compass_26"
+    },
+    {
+      "predicate": {
+        "mega_compass:compass_angle": 0.84375
+      },
+      "model": "mega_compass:item/wishing_weald_compass/wishing_weald_compass_27"
+    },
+    {
+      "predicate": {
+        "mega_compass:compass_angle": 0.875
+      },
+      "model": "mega_compass:item/wishing_weald_compass/wishing_weald_compass_28"
+    },
+    {
+      "predicate": {
+        "mega_compass:compass_angle": 0.90625
+      },
+      "model": "mega_compass:item/wishing_weald_compass/wishing_weald_compass_29"
+    },
+    {
+      "predicate": {
+        "mega_compass:compass_angle": 0.9375
+      },
+      "model": "mega_compass:item/wishing_weald_compass/wishing_weald_compass_30"
+    },
+    {
+      "predicate": {
+        "mega_compass:compass_angle": 0.96875
+      },
+      "model": "mega_compass:item/wishing_weald_compass/wishing_weald_compass_31"
+    }
+  ]
+}
+
+
+

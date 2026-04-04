@@ -1,0 +1,9 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "mega_compass:item/megaroid_compass/megaroid_compass_03"
+  }
+}
+
+
+

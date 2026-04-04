@@ -1,25 +1,25 @@
 {
   "schemaVersion": 1,
-  "id": "meteorite_compass",
+  "id": "mega_compass",
   "version": "${version}",
-  "name": "Meteorite Compass",
-  "description": "A compass addon for CobblemonMegaShowdown that helps you locate meteorite structures (Megaroid and Mega Site)",
+  "name": "Mega Compass",
+  "description": "A compass addon for CobblemonMegaShowdown that helps you locate structures (Megaroid, Mega Site, Wishing Weald)",
   "authors": [
     "Franchino961"
   ],
   "contact": {
-    "homepage": "https://www.curseforge.com/minecraft/mc-mods/meteorite-compass",
-    "sources": "https://github.com/Franchino961-Mod/Cobblemon-Megashowdown-MeteoriteCompass"
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/mega-compass",
+    "sources": "https://github.com/Franchino961-Mod/Cobblemon-Megashowdown-MegaCompass"
   },
   "license": "MIT",
-  "icon": "assets/meteorite_compass/icon.png",
+  "icon": "assets/mega_compass/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.meteoritecompass.MeteoriteCompass"
+      "com.megacompass.MegaCompass"
     ],
     "client": [
-      "com.meteoritecompass.client.MeteoriteCompassClient"
+      "com.megacompass.client.MegaCompassClient"
     ]
   },
   "mixins": [],

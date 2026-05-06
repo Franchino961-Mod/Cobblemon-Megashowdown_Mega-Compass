@@ -22,12 +22,7 @@ import net.minecraft.structure.StructureSet;
 public class SearchWorkerManager {
 
 	private final String id = generateRandomId();
-
-	private List<StructureSearchWorker<?>> workers;
-
-	public SearchWorkerManager() {
-		workers = new ArrayList<StructureSearchWorker<?>>();
-	}
+	private final List<StructureSearchWorker<?>> workers = new ArrayList<>();
 
 	public void createWorkers(ServerWorld world, PlayerEntity player, ItemStack stack, List<Structure> structures,
 			BlockPos startPos) {
@@ -35,10 +30,6 @@ public class SearchWorkerManager {
 
 		Map<StructurePlacement, List<Structure>> placementToStructuresMap = new Object2ObjectArrayMap<>();
 
-		// FIX 1: Get REAL placements from the StructureSet registry.
-		// The real placement has the correct salt/spacing used during world generation.
-		// A synthetic placement with wrong salt causes getStartChunk() to compute
-		// different chunk positions → structures are never found.
 		try {
 			var structureSetRegistry = world.getRegistryManager().get(RegistryKeys.STRUCTURE_SET);
 			for (Structure structure : structures) {
@@ -52,7 +43,7 @@ public class SearchWorkerManager {
 				}
 			}
 		} catch (Exception e) {
-			MegaCompass.LOGGER.error("Failed to get real structure placements: " + e.getMessage());
+			MegaCompass.LOGGER.error("Failed to get real structure placements: {}", e.getMessage());
 		}
 
 		if (placementToStructuresMap.isEmpty()) {
@@ -65,8 +56,7 @@ public class SearchWorkerManager {
 			if (placement instanceof RandomSpreadStructurePlacement rsp) {
 				workers.add(new RandomSpreadSearchWorker(world, player, stack, startPos, rsp, entry.getValue(), id));
 			} else {
-				MegaCompass.LOGGER
-						.debug("Skipping unsupported placement type: " + placement.getClass().getSimpleName());
+				MegaCompass.LOGGER.debug("Skipping unsupported placement type: {}", placement.getClass().getSimpleName());
 			}
 		}
 	}

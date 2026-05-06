@@ -19,6 +19,23 @@ e questo progetto segue il [Semantic Versioning](https://semver.org/spec/v2.0.0.
 
 ---
 
+## [2.1.0] - 6 Maggio 2026 (3D Rendering & Refactoring Update)
+
+### Aggiunto
+- **Modelli 3D Dinamici**: Migrazione completa dal vecchio sistema di animazione 2D a 32 frame a un sistema di rendering 3D dinamico e moderno.
+- **Rendering Ago stile AE2**: Implementato un sistema custom di `BakedModel` e `FabricBakedModel` che calcola matematicamente la rotazione dell'ago in tempo reale in base alla posizione del giocatore e dello stato della bussola.
+- **Indipendenza Multiplayer**: Logica di ricerca rifatta da zero per supportare più giocatori contemporaneamente senza interferenze, utilizzando un registro dei worker basato su UUID.
+- **Sicurezza Migliorata**: Aggiunta la validazione lato server per le richieste di ricerca, prevenendo l'invio di pacchetti malevoli dal client.
+- **Robustezza e Performance**: Implementata una gestione dei worker thread-safe con un limite globale di 100 worker attivi per proteggere la stabilità del server.
+- **Miglioramenti GUI & UX**: Riprogettata l'interfaccia di selezione con posizionamento relativo e aggiunto un messaggio di feedback in tempo reale nella barra dei messaggi (hotbar).
+
+### Modificato
+- **Ottimizzazione Risorse**: Ridotto significativamente il peso della mod eliminando centinaia di file JSON e texture di frame ridondanti.
+- **Personalizzazione Texture Migliorata**: Ogni bussola ora utilizza un singolo file di texture dedicato (`.png`), rendendo estremamente semplice per gli utenti creare ricolorazioni o texture personalizzate di alta qualità.
+- **Raffinamento Tecnico**: Rimossi i componenti dati ridondanti, risolti tutti i warning dell'IDE e pinate le dipendenze di build (Loom 1.8.13) a versioni stabili.
+
+---
+
 ## [2.0.0] - 23 Marzo 2026 (Major Update)
 
 ### Aggiunto
@@ -103,11 +120,13 @@ e questo progetto segue il [Semantic Versioning](https://semver.org/spec/v2.0.0.
 - [x] Refactoring totale Namespace ID e Classi
 - [x] Rename finale mod in "Mega Compass" per coerenza tematica
 
-### Fase 4 - Integrazione (v2.1.0) 📋
+### Fase 4 - Integrazione & Rendering (v2.1.0) ✅
+- [x] Migrazione a Modelli 3D dinamici (stile AE2)
+- [x] Ottimizzazione degli asset e delle performance
 - [ ] Tracking strutture visitate per evitarne il ri-lookup
 - [ ] Integrazione JEI/REI per ricette
-- [ ] Supporto datapack configurazione esteso
 - [ ] Effetti particellari direzionali e Suoni
+- [ ] Supporto datapack configurazione esteso
 - [ ] Implementazione Json configuration
 
 ---

@@ -19,6 +19,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [2.1.0] - May 6, 2026 (3D Rendering & Refactoring Update)
+
+### Added
+- **Dynamic 3D Models**: Complete migration from the old static 32-frame 2D animation system to a modern, dynamic 3D rendering system.
+- **AE2-Style Pointer Rendering**: Implemented a custom `BakedModel` and `FabricBakedModel` system that mathematically calculates the needle's rotation in real-time based on the player's position and compass state.
+- **Multiplayer Independence**: Completely refactored the internal search logic to support multiple players simultaneously without interference by using a UUID-based worker registry.
+- **Improved Security**: Added server-side validation for structure search requests to prevent malicious client packets from being processed.
+- **Robustness & Performance**: Implemented thread-safe worker management with a global limit of 100 active search workers to protect server stability.
+- **GUI & UX Enhancements**: Redesigned the structure selection GUI with relative layout positioning and added real-time search feedback in the player's hotbar.
+
+### Changed
+- **Resource Optimization**: Significantly reduced mod size by removing hundreds of redundant JSON files and frame textures.
+- **Improved Texture Customization**: Each compass now uses a dedicated single-texture system (one `.png` per compass), making it extremely easy for users to create high-quality recolors or custom textures.
+- **Technical Refinement**: Removed redundant data components, fixed IDE lint warnings, and pinned build dependencies (Fabric Loom 1.8.13) to stable versions.
+
+---
+
 ## [2.0.0] - March 23, 2026 (Major Update)
 
 ### Added
@@ -104,10 +121,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [x] Mod ID separation and Full Rename to Mega Compass
 - [x] Codebase Cleanup and Refactor
 
-### Phase 4 - Integration (v2.1.0) 📋
+### Phase 4 - Integration & Rendering (v2.1.0) ✅
+- [x] Migration to Dynamic 3D Models (AE2-style)
+- [x] Asset and Performance Optimization
 - [ ] Visited structure tracking
 - [ ] JEI/REI integration
-- [ ] Deep integration with CobblemonMegaShowdown events
 - [ ] Custom particle effects matching meteorite types
 - [ ] Support for non-overworld structure types
 

@@ -64,10 +64,6 @@ public class MegaCompass implements ModInitializer {
 			.codec(Codec.INT)
 			.packetCodec(PacketCodecs.VAR_INT)
 			.build();
-	public static final ComponentType<Integer> METEORITE_TYPE_COMPONENT = ComponentType.<Integer>builder()
-			.codec(Codec.INT)
-			.packetCodec(PacketCodecs.VAR_INT)
-			.build();
 
 	@Override
 	public void onInitialize() {
@@ -82,8 +78,6 @@ public class MegaCompass implements ModInitializer {
 		Registry.register(Registries.DATA_COMPONENT_TYPE, Identifier.of(MODID, "search_radius"),
 				SEARCH_RADIUS_COMPONENT);
 		Registry.register(Registries.DATA_COMPONENT_TYPE, Identifier.of(MODID, "samples"), SAMPLES_COMPONENT);
-		Registry.register(Registries.DATA_COMPONENT_TYPE, Identifier.of(MODID, "meteorite_type"),
-				METEORITE_TYPE_COMPONENT);
 
 		// Register items
 		MEGA_SITE_COMPASS = Registry.register(
@@ -127,8 +121,7 @@ public class MegaCompass implements ModInitializer {
 			content.add(MEGA_COMPASS);
 		});
 
-		// Register the C2S packet type so Fabric Networking knows how to encode it.
-		// Without this, sending SearchPacket throws a ClassCastException.
+		// Register the C2S packet type
 		PayloadTypeRegistry.playC2S().register(SearchPacket.TYPE, SearchPacket.CODEC);
 
 		// Register the server-side handler for SearchPacket.

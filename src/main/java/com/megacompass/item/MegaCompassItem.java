@@ -6,6 +6,7 @@ import com.megacompass.MegaCompass;
 import com.megacompass.util.CompassState;
 import com.megacompass.util.StructureUtils;
 import com.megacompass.worker.SearchWorkerManager;
+import com.megacompass.worker.WorldWorkerManager;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -21,7 +22,6 @@ import net.minecraft.world.gen.structure.Structure;
 
 public class MegaCompassItem extends Item {
 
-	private SearchWorkerManager workerManager;
 	private final Identifier defaultTargetId;
 	private final boolean opensGui;
 
@@ -36,7 +36,6 @@ public class MegaCompassItem extends Item {
 		super(settings);
 		this.defaultTargetId = defaultTargetId;
 		this.opensGui = opensGui;
-		workerManager = new SearchWorkerManager();
 	}
 
 	@Override
@@ -45,8 +44,9 @@ public class MegaCompassItem extends Item {
 
 		// Shift + Right Click = Reset compass
 		if (player.isSneaking()) {
-			workerManager.stop();
-			workerManager.clear();
+            if (!world.isClient) {
+                WorldWorkerManager.stopWorkersForPlayer(player.getUuid());
+            }
 			setState(stack, CompassState.INACTIVE);
 			return TypedActionResult.consume(stack);
 		}
@@ -86,14 +86,17 @@ public class MegaCompassItem extends Item {
 			Structure targetStructure = StructureUtils.getStructureForId(serverWorld, targetId);
 
 			if (targetStructure == null) {
-				MegaCompass.LOGGER.error("Unknown meteorite structure: " + targetId);
+				MegaCompass.LOGGER.error("Unknown meteorite structure: {}", targetId);
 				setNotFound(stack, 0, 0);
 				return;
 			}
 
 			List<Structure> structures = List.of(targetStructure);
 
-			workerManager.stop();
+            // Point 1 & 2: Use global manager with player UUID
+            WorldWorkerManager.stopWorkersForPlayer(player.getUuid());
+			
+            SearchWorkerManager workerManager = new SearchWorkerManager();
 			workerManager.createWorkers(serverWorld, player, stack, structures, pos);
 			boolean started = workerManager.start();
 
@@ -106,15 +109,14 @@ public class MegaCompassItem extends Item {
 	public void succeed(ItemStack stack, Identifier structureId, int x, int z, int samples,
 			boolean displayCoordinates) {
 		setFound(stack, structureId, x, z, samples);
-		workerManager.clear();
+        // Workers stop themselves when finished, so no need to clear here if they are removed from WorldWorkerManager
 	}
 
 	public void fail(ItemStack stack, int radius, int samples) {
-		workerManager.pop();
-		boolean started = workerManager.start();
-		if (!started) {
-			setNotFound(stack, radius, samples);
-		}
+        // This is tricky without the local workerManager state. 
+        // But since we only have one structure per search now (Fase 2 refactor), 
+        // workerManager.pop() and re-start is not strictly needed if structures.size() == 1.
+        setNotFound(stack, radius, samples);
 	}
 
 	public boolean isActive(ItemStack stack) {
@@ -132,15 +134,6 @@ public class MegaCompassItem extends Item {
 		stack.set(MegaCompass.FOUND_X_COMPONENT, x);
 		stack.set(MegaCompass.FOUND_Z_COMPONENT, z);
 		stack.set(MegaCompass.SAMPLES_COMPONENT, samples);
-
-		// Set meteorite type (0 = Megaroid, 1 = Mega Site)
-		if (structureId.equals(StructureUtils.MEGAROID)) {
-			stack.set(MegaCompass.METEORITE_TYPE_COMPONENT, 0);
-		} else if (structureId.equals(StructureUtils.MEGA_SITE)) {
-			stack.set(MegaCompass.METEORITE_TYPE_COMPONENT, 1);
-		} else if (structureId.equals(StructureUtils.WISHING_WEALD)) {
-			stack.set(MegaCompass.METEORITE_TYPE_COMPONENT, 2);
-		}
 	}
 
 	public void setNotFound(ItemStack stack, int searchRadius, int samples) {
@@ -178,7 +171,8 @@ public class MegaCompassItem extends Item {
 		if (stack.contains(MegaCompass.STRUCTURE_ID_COMPONENT)) {
 			return Identifier.of(stack.get(MegaCompass.STRUCTURE_ID_COMPONENT));
 		}
-		return Identifier.of("", "");
+        // Point 11: Return null or a clear default instead of empty ID
+		return null;
 	}
 
 	public int getSearchRadius(ItemStack stack) {
@@ -207,9 +201,9 @@ public class MegaCompassItem extends Item {
 
 		// Add lore text based on item type
 		String loreKey = this.getTranslationKey() + ".lore";
-		Text loreText = Text.translatable(loreKey).withColor(0x7F7F7F); // Gray color
+		Text loreText = Text.translatable(loreKey);
 
-		// Split by newline in case of multi-line lore
+        // Point 14: Better tooltip handling
 		String loreString = loreText.getString();
 		for (String line : loreString.split("\n")) {
 			if (!line.isEmpty()) {

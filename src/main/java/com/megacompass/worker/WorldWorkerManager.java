@@ -1,10 +1,16 @@
 package com.megacompass.worker;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+import java.util.concurrent.CopyOnWriteArrayList;
+
+import com.megacompass.MegaCompass;
 
 public class WorldWorkerManager {
-    private static List<IWorker> workers = new ArrayList<IWorker>();
+    // Use CopyOnWriteArrayList for thread-safe iteration while modifying
+    private static final List<IWorker> workers = new CopyOnWriteArrayList<>();
+    private static final int MAX_WORKERS = 100; // Point 13: Limit active workers
+    
     private static long startTime = -1;
     private static int index = 0;
 
@@ -14,44 +20,75 @@ public class WorldWorkerManager {
             return;
         }
 
-        index = 0;
-        IWorker task = getNext();
-        if (task == null)
+        if (workers.isEmpty()) {
             return;
+        }
 
-        long time = 50 - (System.currentTimeMillis() - startTime);
-        if (time < 10)
-            time = 10; // If ticks are lagging, give us at least 10ms to do something.
-        time += System.currentTimeMillis();
+        // Reset index for the tick
+        index = 0;
+        
+        long timeLimit = 50 - (System.currentTimeMillis() - startTime);
+        if (timeLimit < 10) {
+            timeLimit = 10; // If ticks are lagging, give us at least 10ms to do something.
+        }
+        long endTime = System.currentTimeMillis() + timeLimit;
 
-        while (System.currentTimeMillis() < time && task != null) {
+        // Point 12: Loop over workers with time limit
+        while (System.currentTimeMillis() < endTime) {
+            IWorker task = getNext();
+            if (task == null) break;
+
             boolean again = task.doWork();
 
             if (!task.hasWork()) {
                 remove(task);
-                task = getNext();
             } else if (!again) {
-                task = getNext();
+                // If the worker says it doesn't need to run again this tick, move to next
+            } else {
+                // If it wants to run again, stay on this index for the next getNext call
+                index--;
             }
         }
     }
 
-    public static synchronized void addWorker(IWorker worker) {
+    public static void addWorker(IWorker worker) {
+        if (workers.size() >= MAX_WORKERS) {
+            MegaCompass.LOGGER.warn("Maximum worker limit reached ({}), skipping new worker.", MAX_WORKERS);
+            return;
+        }
         workers.add(worker);
     }
 
     private static synchronized IWorker getNext() {
-        return workers.size() > index ? workers.get(index++) : null;
+        if (index >= workers.size()) {
+            return null;
+        }
+        return workers.get(index++);
     }
 
     private static synchronized void remove(IWorker worker) {
-        workers.remove(worker);
-        index--;
+        if (workers.remove(worker)) {
+            index = Math.max(0, index - 1);
+        }
+    }
+
+    /**
+     * Stop all workers associated with a specific player UUID.
+     * Fixes the singleton item issue (Point 1 & 2).
+     */
+    public static void stopWorkersForPlayer(UUID playerUuid) {
+        for (IWorker worker : workers) {
+            if (playerUuid.equals(worker.getOwnerUuid())) {
+                worker.stop();
+                remove(worker);
+            }
+        }
     }
 
     // Internal only, used to clear everything when the server shuts down.
-    public static synchronized void clear() {
+    public static void clear() {
         workers.clear();
+        index = 0;
     }
 
     public static interface IWorker {
@@ -63,5 +100,15 @@ public class WorldWorkerManager {
          * Returning false will skip calling this worker until next tick.
          */
         boolean doWork();
+
+        /**
+         * Returns the UUID of the player who started this worker.
+         */
+        UUID getOwnerUuid();
+
+        /**
+         * Signal the worker to stop immediately.
+         */
+        void stop();
     }
 }

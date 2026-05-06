@@ -1,6 +1,7 @@
 package com.megacompass.worker;
 
 import java.util.List;
+import java.util.UUID;
 
 import com.megacompass.MegaCompass;
 import com.megacompass.item.MegaCompassItem;
@@ -24,14 +25,14 @@ public abstract class StructureSearchWorker<T extends StructurePlacement> implem
 	protected static final int MAX_RADIUS = 10000; // 10000 blocks
 	protected static final int MAX_SAMPLES = 100000; // Maximum samples
 
-	protected String managerId;
-	protected ServerWorld world;
-	protected PlayerEntity player;
-	protected ItemStack stack;
-	protected BlockPos startPos;
+	protected final String managerId;
+	protected final ServerWorld world;
+	protected final UUID playerUuid;
+	protected final ItemStack stack;
+	protected final BlockPos startPos;
 	protected BlockPos currentPos;
-	protected T placement;
-	protected List<Structure> structureSet;
+	protected final T placement;
+	protected final List<Structure> structureSet;
 	protected int samples;
 	protected boolean finished;
 	protected int lastRadiusThreshold;
@@ -39,7 +40,7 @@ public abstract class StructureSearchWorker<T extends StructurePlacement> implem
 	public StructureSearchWorker(ServerWorld world, PlayerEntity player, ItemStack stack, BlockPos startPos,
 			T placement, List<Structure> structureSet, String managerId) {
 		this.world = world;
-		this.player = player;
+		this.playerUuid = player.getUuid();
 		this.stack = stack;
 		this.startPos = startPos;
 		this.structureSet = structureSet;
@@ -54,13 +55,9 @@ public abstract class StructureSearchWorker<T extends StructurePlacement> implem
 
 	public void start() {
 		if (MegaCompass.isMegaCompassItem(stack)) {
-			if (MAX_RADIUS > 0) {
-				MegaCompass.LOGGER.info("SearchWorkerManager " + managerId + ": " + getName() + " starting with "
-						+ (shouldLogRadius() ? MAX_RADIUS + " max radius, " : "") + MAX_SAMPLES + " max samples");
-				WorldWorkerManager.addWorker(this);
-			} else {
-				fail();
-			}
+			MegaCompass.LOGGER.info("SearchWorkerManager {}: {} starting with {} max samples{}", 
+					managerId, getName(), MAX_SAMPLES, shouldLogRadius() ? ", " + MAX_RADIUS + " max radius" : "");
+			WorldWorkerManager.addWorker(this);
 		}
 	}
 
@@ -81,18 +78,18 @@ public abstract class StructureSearchWorker<T extends StructurePlacement> implem
 		return false;
 	}
 
+    @Override
+    public UUID getOwnerUuid() {
+        return playerUuid;
+    }
+
 	protected Pair<BlockPos, Structure> getStructureGeneratingAt(ChunkPos chunkPos) {
 		for (Structure structure : structureSet) {
-			// FIX 2: use true (not false) so the chunk is generated up to STRUCTURE_STARTS
-			// status if needed. STRUCTURE_STARTS is the very first (lightest) generation
-			// phase and is required to detect structures in unloaded/unexplored areas.
 			Chunk chunk = world.getChunk(chunkPos.x, chunkPos.z, ChunkStatus.STRUCTURE_STARTS, true);
 			if (chunk != null) {
 				StructureStart structureStart = world.getStructureAccessor()
 						.getStructureStart(ChunkSectionPos.from(chunkPos, 0), structure, chunk);
 				if (structureStart != null && structureStart.hasChildren()) {
-					// FIX 3: use placement.getLocatePos() for the canonical structure position
-					// instead of a hardcoded +8, Y=64 offset.
 					BlockPos pos = placement.getLocatePos(structureStart.getPos());
 					return Pair.of(pos, structure);
 				}
@@ -103,33 +100,35 @@ public abstract class StructureSearchWorker<T extends StructurePlacement> implem
 	}
 
 	protected void succeed(BlockPos pos, Structure structure) {
-		MegaCompass.LOGGER.info("SearchWorkerManager " + managerId + ": " + getName() + " succeeded with "
-				+ (shouldLogRadius() ? getRadius() + " radius, " : "") + samples + " samples");
+		MegaCompass.LOGGER.info("SearchWorkerManager {}: {} succeeded with {} samples{}", 
+				managerId, getName(), samples, shouldLogRadius() ? " and " + getRadius() + " radius" : "");
+		
 		if (MegaCompass.isMegaCompassItem(stack)) {
 			((MegaCompassItem) stack.getItem()).succeed(stack, StructureUtils.getIdForStructure(world, structure),
 					pos.getX(), pos.getZ(), samples, true);
 		} else {
-			MegaCompass.LOGGER.error("SearchWorkerManager " + managerId + ": " + getName()
-					+ " found invalid compass after successful search");
+			MegaCompass.LOGGER.error("SearchWorkerManager {}: {} found invalid compass after successful search", 
+					managerId, getName());
 		}
 		finished = true;
 	}
 
 	protected void fail() {
-		MegaCompass.LOGGER.info("SearchWorkerManager " + managerId + ": " + getName() + " failed with "
-				+ (shouldLogRadius() ? getRadius() + " radius, " : "") + samples + " samples");
+		MegaCompass.LOGGER.info("SearchWorkerManager {}: {} failed after {} samples{}", 
+				managerId, getName(), samples, shouldLogRadius() ? " and " + getRadius() + " radius" : "");
+		
 		if (MegaCompass.isMegaCompassItem(stack)) {
 			((MegaCompassItem) stack.getItem()).fail(stack, roundRadius(getRadius(), 250), samples);
 		} else {
-			MegaCompass.LOGGER.error("SearchWorkerManager " + managerId + ": " + getName()
-					+ " found invalid compass after failed search");
+			MegaCompass.LOGGER.error("SearchWorkerManager {}: {} found invalid compass after failed search", 
+					managerId, getName());
 		}
 		finished = true;
 	}
 
+	@Override
 	public void stop() {
-		MegaCompass.LOGGER.info("SearchWorkerManager " + managerId + ": " + getName() + " stopped with "
-				+ (shouldLogRadius() ? getRadius() + " radius, " : "") + samples + " samples");
+		MegaCompass.LOGGER.info("SearchWorkerManager {}: {} stopped", managerId, getName());
 		finished = true;
 	}
 
@@ -138,7 +137,7 @@ public abstract class StructureSearchWorker<T extends StructurePlacement> implem
 	}
 
 	protected int roundRadius(int radius, int roundTo) {
-		return ((int) radius / roundTo) * roundTo;
+		return (radius / roundTo) * roundTo;
 	}
 
 	protected abstract String getName();

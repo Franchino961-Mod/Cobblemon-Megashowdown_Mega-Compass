@@ -36,6 +36,16 @@ public record SearchPacket(String structureId) implements CustomPayload {
 
             if (!stack.isEmpty() && stack.getItem() instanceof MegaCompassItem compass) {
                 Identifier targetId = Identifier.of(packet.structureId());
+                
+                // Point 3: Validate structure ID
+                if (!targetId.equals(com.megacompass.util.StructureUtils.MEGAROID) &&
+                    !targetId.equals(com.megacompass.util.StructureUtils.MEGA_SITE) &&
+                    !targetId.equals(com.megacompass.util.StructureUtils.WISHING_WEALD)) {
+                    MegaCompass.LOGGER.warn("Player {} sent invalid search target ID: {}", 
+                            context.player().getName().getString(), targetId);
+                    return;
+                }
+
                 compass.searchForMeteoriteStructures(
                         (ServerWorld) context.player().getWorld(),
                         context.player(),

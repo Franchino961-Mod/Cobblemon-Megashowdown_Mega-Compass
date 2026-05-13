@@ -23,7 +23,7 @@ e questo progetto segue il [Semantic Versioning](https://semver.org/spec/v2.0.0.
 
 ### Aggiunto
 - **Modelli 3D Dinamici**: Migrazione completa dal vecchio sistema di animazione 2D a 32 frame a un sistema di rendering 3D dinamico e moderno.
-- **Rendering Ago stile AE2**: Implementato un sistema custom di `BakedModel` e `FabricBakedModel` che calcola matematicamente la rotazione dell'ago in tempo reale in base alla posizione del giocatore e dello stato della bussola.
+- **Rendering Ago**: Implementato un sistema custom di `BakedModel` e `FabricBakedModel` che calcola matematicamente la rotazione dell'ago in tempo reale in base alla posizione del giocatore e dello stato della bussola.
 - **Indipendenza Multiplayer**: Logica di ricerca rifatta da zero per supportare più giocatori contemporaneamente senza interferenze, utilizzando un registro dei worker basato su UUID.
 - **Sicurezza Migliorata**: Aggiunta la validazione lato server per le richieste di ricerca, prevenendo l'invio di pacchetti malevoli dal client.
 - **Robustezza e Performance**: Implementata una gestione dei worker thread-safe con un limite globale di 100 worker attivi per proteggere la stabilità del server.
@@ -112,7 +112,7 @@ e questo progetto segue il [Semantic Versioning](https://semver.org/spec/v2.0.0.
 ### Fase 3 - Avanzato & Rendering (v2.0.0) ✅
 - [x] Refactoring totale Namespace ID e Classi
 - [x] Rename finale mod in "Mega Compass" per coerenza tematica
-- [x] Migrazione a Modelli 3D dinamici (stile AE2)
+- [x] Migrazione a Modelli 3D dinamici
 - [x] Ottimizzazione degli asset e delle performance
 - [ ] Tracking strutture visitate per evitarne il ri-lookup
 - [ ] Integrazione JEI/REI per ricette

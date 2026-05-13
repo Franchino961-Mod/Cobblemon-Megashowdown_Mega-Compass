@@ -25,10 +25,10 @@ Stanco di scavare a caso sperando di trovare meteoriti o la Wishing Weald? Quest
 
 - 🧭 **Navigazione Intelligente**: Punta al Megaroid, Mega Site o Wishing Weald più vicino.
 - 🎯 **Quattro Tipi di Bussole**: Bussole dedicate per ogni tipo di struttura, più una Mega Bussola Combinata che ti permette di scegliere il bersaglio tramite una GUI intuitiva.
-- 📐 **Sistema di Rendering 3D**: Moderni aghi 3D stile AE2 che ruotano matematicamente in base alla tua posizione e alle coordinate del bersaglio.
+- 📐 **Sistema di Rendering 3D**: Moderni aghi 3Dche ruotano matematicamente in base alla tua posizione e alle coordinate del bersaglio.
 - 🔍 **Ricerca Asincrona**: Algoritmo di ricerca a spirale efficiente che non causa lag al server.
 - 📊 **Display HUD**: Visualizzazione in tempo reale del progresso della ricerca, coordinate e distanza.
-- 👥 **Multiplayer Ready**: Gestione dei worker isolata per giocatore per un'esperienza multiplayer senza interferenze.
+- 👥 **Multiplayer Ready**: Gestione dei worker isolata per giocatore per un'esperienza multiplayer senza interferenze. 
 - 🌐 **Multi-Lingua**: Supporta 8 lingue (IT, EN, ES, FR, DE, PT-BR, RU, ZH-CN).
 - ⚡ **Ottimizzato**: Sistema worker thread-safe che garantisce massime prestazioni del server.
 

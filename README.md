@@ -25,7 +25,7 @@ Tired of digging randomly hoping to find meteorites or wishing wealds? This mod 
 
 - 🧭 **Smart Navigation**: Points to nearest Megaroid, Mega Site, or Wishing Weald.
 - 🎯 **Four Compass Types**: Dedicated compasses for each structure type, plus a Combined Mega Compass that lets you choose your target via an intuitive GUI.
-- 📐 **3D Rendering System**: Modern AE2-style 3D compass needles that rotate mathematically based on your position and target coordinates.
+- 📐 **3D Rendering System**: Modern 3D compass needles that rotate mathematically based on your position and target coordinates.
 - 🔍 **Async Search**: Efficient spiral search algorithm that doesn't lag the server.
 - 📊 **HUD Display**: Real-time search progress, coordinates, and distance display.
 - 👥 **Multiplayer Ready**: Fully isolated search workers per player for seamless multiplayer experience.

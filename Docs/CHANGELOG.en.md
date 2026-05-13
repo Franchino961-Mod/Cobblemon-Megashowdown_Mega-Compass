@@ -23,7 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - **Dynamic 3D Models**: Complete migration from the old static 32-frame 2D animation system to a modern, dynamic 3D rendering system.
-- **AE2-Style Pointer Rendering**: Implemented a custom `BakedModel` and `FabricBakedModel` system that mathematically calculates the needle's rotation in real-time based on the player's position and compass state.
+- **Pointer Rendering**: Implemented a custom `BakedModel` and `FabricBakedModel` system that mathematically calculates the needle's rotation in real-time based on the player's position and compass state.
 - **Multiplayer Independence**: Completely refactored the internal search logic to support multiple players simultaneously without interference by using a UUID-based worker registry.
 - **Improved Security**: Added server-side validation for structure search requests to prevent malicious client packets from being processed.
 - **Robustness & Performance**: Implemented thread-safe worker management with a global limit of 100 active search workers to protect server stability.
@@ -113,7 +113,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Phase 3 - Advanced & Rendering (v2.0.0) ✅
 - [x] Mod ID separation and Full Rename to Mega Compass
 - [x] Codebase Cleanup and Refactor
-- [x] Migration to Dynamic 3D Models (AE2-style)
+- [x] Migration to Dynamic 3D Models
 - [x] Asset and Performance Optimization
 - [ ] Visited structure tracking
 - [ ] JEI/REI integration

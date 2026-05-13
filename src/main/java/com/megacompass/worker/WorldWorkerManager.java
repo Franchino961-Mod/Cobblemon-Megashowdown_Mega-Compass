@@ -7,10 +7,10 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import com.megacompass.MegaCompass;
 
 public class WorldWorkerManager {
-    // Use CopyOnWriteArrayList for thread-safe iteration while modifying
+
     private static final List<IWorker> workers = new CopyOnWriteArrayList<>();
-    private static final int MAX_WORKERS = 100; // Point 13: Limit active workers
-    
+    private static final int MAX_WORKERS = 100;
+
     private static long startTime = -1;
     private static int index = 0;
 
@@ -24,16 +24,14 @@ public class WorldWorkerManager {
             return;
         }
 
-        // Reset index for the tick
         index = 0;
-        
+
         long timeLimit = 50 - (System.currentTimeMillis() - startTime);
         if (timeLimit < 10) {
-            timeLimit = 10; // If ticks are lagging, give us at least 10ms to do something.
+            timeLimit = 10;
         }
         long endTime = System.currentTimeMillis() + timeLimit;
 
-        // Point 12: Loop over workers with time limit
         while (System.currentTimeMillis() < endTime) {
             IWorker task = getNext();
             if (task == null) break;
@@ -43,9 +41,8 @@ public class WorldWorkerManager {
             if (!task.hasWork()) {
                 remove(task);
             } else if (!again) {
-                // If the worker says it doesn't need to run again this tick, move to next
+                // Worker non vuole girare di nuovo questo tick, passa al prossimo
             } else {
-                // If it wants to run again, stay on this index for the next getNext call
                 index--;
             }
         }
@@ -53,7 +50,7 @@ public class WorldWorkerManager {
 
     public static void addWorker(IWorker worker) {
         if (workers.size() >= MAX_WORKERS) {
-            MegaCompass.LOGGER.warn("Maximum worker limit reached ({}), skipping new worker.", MAX_WORKERS);
+            MegaCompass.LOGGER.warn("Limite massimo di worker raggiunto ({}), nuovo worker ignorato.", MAX_WORKERS);
             return;
         }
         workers.add(worker);
@@ -73,42 +70,38 @@ public class WorldWorkerManager {
     }
 
     /**
-     * Stop all workers associated with a specific player UUID.
-     * Fixes the singleton item issue (Point 1 & 2).
+     * Ferma e rimuove tutti i worker associati a un determinato player.
+     * Risolve la race condition precedente iterando in modo sicuro con removeIf.
      */
-    public static void stopWorkersForPlayer(UUID playerUuid) {
-        for (IWorker worker : workers) {
+    public static synchronized void stopWorkersForPlayer(UUID playerUuid) {
+        workers.removeIf(worker -> {
             if (playerUuid.equals(worker.getOwnerUuid())) {
                 worker.stop();
-                remove(worker);
+                return true;
             }
-        }
+            return false;
+        });
+        index = 0;
     }
 
-    // Internal only, used to clear everything when the server shuts down.
     public static void clear() {
         workers.clear();
         index = 0;
     }
 
-    public static interface IWorker {
+    public interface IWorker {
         boolean hasWork();
 
         /**
-         * Perform a task, returning true from this will have the manager call this
-         * function again this tick if there is time left.
-         * Returning false will skip calling this worker until next tick.
+         * Esegue un'unità di lavoro. Restituisce true se vuole girare di nuovo
+         * nello stesso tick (se c'è tempo), false per rimandare al tick successivo.
          */
         boolean doWork();
 
-        /**
-         * Returns the UUID of the player who started this worker.
-         */
+        /** Restituisce l'UUID del player che ha avviato questo worker. */
         UUID getOwnerUuid();
 
-        /**
-         * Signal the worker to stop immediately.
-         */
+        /** Segnala al worker di fermarsi immediatamente. */
         void stop();
     }
 }

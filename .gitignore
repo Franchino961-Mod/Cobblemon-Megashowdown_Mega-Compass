@@ -174,4 +174,4 @@ Docs/*
 !CHANGELOG.*.md
 
 # Backups
-src/main/resources/assets/mega_compass/backup/
+/backup/

@@ -5,7 +5,7 @@
 
 [![Minecraft](https://img.shields.io/badge/Minecraft-1.21.1-green.svg)](https://www.minecraft.net/)
 [![Versione](https://img.shields.io/badge/versione-2.0.0-blue.svg)]()
-[![Fabric](https://img.shields.io/badge/Fabric-0.16.9-blue.svg)](https://fabricmc.net/)
+[![Fabric](https://img.shields.io/badge/Fabric-0.17.2-blue.svg)](https://fabricmc.net/)
 [![Licenza](https://img.shields.io/badge/Licenza-MIT-yellow.svg)](../LICENSE)
 
 [![en](https://img.shields.io/badge/lang-en-red.svg)](../README.md)
@@ -25,10 +25,12 @@ Stanco di scavare a caso sperando di trovare meteoriti o la Wishing Weald? Quest
 
 - 🧭 **Navigazione Intelligente**: Punta al Megaroid, Mega Site o Wishing Weald più vicino.
 - 🎯 **Quattro Tipi di Bussole**: Bussole dedicate per ogni tipo di struttura, più una Mega Bussola Combinata che ti permette di scegliere il bersaglio tramite una GUI intuitiva.
+- 📐 **Sistema di Rendering 3D**: Moderni aghi 3D stile AE2 che ruotano matematicamente in base alla tua posizione e alle coordinate del bersaglio.
 - 🔍 **Ricerca Asincrona**: Algoritmo di ricerca a spirale efficiente che non causa lag al server.
-- 📊 **Display HUD**: Visualizzazione in tempo reale del progresso della ricerca e della distanza.
+- 📊 **Display HUD**: Visualizzazione in tempo reale del progresso della ricerca, coordinate e distanza.
+- 👥 **Multiplayer Ready**: Gestione dei worker isolata per giocatore per un'esperienza multiplayer senza interferenze.
 - 🌐 **Multi-Lingua**: Supporta 8 lingue (IT, EN, ES, FR, DE, PT-BR, RU, ZH-CN).
-- ⚡ **Ottimizzato**: Sistema worker che garantisce prestazioni fluide del server.
+- ⚡ **Ottimizzato**: Sistema worker thread-safe che garantisce massime prestazioni del server.
 
 ---
 
@@ -86,8 +88,8 @@ Questa mod può localizzare tre tipi importantissimi di strutture da CobblemonMe
 
 ### Requisiti
 - **Minecraft**: 1.21.1
-- **Fabric Loader**: 0.16.9 o superiore
-- **Fabric API**: 0.108.0 o superiore
+- **Fabric Loader**: 0.17.2 o superiore
+- **Fabric API**: 0.116.11 o superiore
 - **CobblemonMegaShowdown**: Ultima versione
 - **Java**: 21 o superiore
 
@@ -95,7 +97,7 @@ Questa mod può localizzare tre tipi importantissimi di strutture da CobblemonMe
 1. Scarica e installa [Fabric Loader](https://fabricmc.net/use/)
 2. Scarica [Fabric API](https://modrinth.com/mod/fabric-api)
 3. Scarica [CobblemonMegaShowdown](https://www.curseforge.com/minecraft/mc-mods/cobblemon-megashowdown)
-4. Posiziona `mega_showdown-mega-compass-2.0.0.jar` nella tua cartella `mods`
+4. Posiziona `mega_showdown-mega-compass-fabric-mc1.21.1-2.0.0.jar` nella tua cartella `mods`
 5. Avvia Minecraft e divertiti!
 
 ## ⚙️ Configurazione

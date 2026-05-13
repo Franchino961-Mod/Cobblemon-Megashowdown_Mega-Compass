@@ -172,6 +172,7 @@ node_modules/
 Docs/*
 !README.*.md
 !CHANGELOG.*.md
+!assets/
 
 # Backups
 /backup/

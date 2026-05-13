@@ -5,7 +5,7 @@
 
 [![Minecraft](https://img.shields.io/badge/Minecraft-1.21.1-green.svg)](https://www.minecraft.net/)
 [![Version](https://img.shields.io/badge/version-2.0.0-blue.svg)]()
-[![Fabric](https://img.shields.io/badge/Fabric-0.16.9-blue.svg)](https://fabricmc.net/)
+[![Fabric](https://img.shields.io/badge/Fabric-0.17.2-blue.svg)](https://fabricmc.net/)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 [![en](https://img.shields.io/badge/lang-en-red.svg)](README.md)
@@ -25,10 +25,12 @@ Tired of digging randomly hoping to find meteorites or wishing wealds? This mod 
 
 - 🧭 **Smart Navigation**: Points to nearest Megaroid, Mega Site, or Wishing Weald.
 - 🎯 **Four Compass Types**: Dedicated compasses for each structure type, plus a Combined Mega Compass that lets you choose your target via an intuitive GUI.
+- 📐 **3D Rendering System**: Modern AE2-style 3D compass needles that rotate mathematically based on your position and target coordinates.
 - 🔍 **Async Search**: Efficient spiral search algorithm that doesn't lag the server.
-- 📊 **HUD Display**: Real-time search progress and distance display.
+- 📊 **HUD Display**: Real-time search progress, coordinates, and distance display.
+- 👥 **Multiplayer Ready**: Fully isolated search workers per player for seamless multiplayer experience.
 - 🌐 **Multi-Language**: Supports 8 languages (EN, IT, ES, FR, DE, PT-BR, RU, ZH-CN).
-- ⚡ **Optimized**: Worker system ensures smooth server performance.
+- ⚡ **Optimized**: Thread-safe worker system ensures maximum server performance.
 
 ---
 
@@ -86,8 +88,8 @@ The compasses can locate three types of crucial structures from CobblemonMegaSho
 
 ### Requirements
 - **Minecraft**: 1.21.1
-- **Fabric Loader**: 0.16.9 or higher
-- **Fabric API**: 0.108.0 or higher
+- **Fabric Loader**: 0.17.2 or higher
+- **Fabric API**: 0.116.11 or higher
 - **CobblemonMegaShowdown**: Latest version (for the structures)
 - **Java**: 21 or higher
 
@@ -95,7 +97,7 @@ The compasses can locate three types of crucial structures from CobblemonMegaSho
 1. Download and install [Fabric Loader](https://fabricmc.net/use/)
 2. Download [Fabric API](https://modrinth.com/mod/fabric-api)
 3. Download [CobblemonMegaShowdown](https://www.curseforge.com/minecraft/mc-mods/cobblemon-megashowdown)
-4. Place `mega_showdown-mega-compass-2.0.0.jar` in your `mods` folder
+4. Place `mega_showdown-mega-compass-fabric-mc1.21.1-2.0.0.jar` in your `mods` folder
 5. Launch Minecraft and enjoy!
 
 ## ⚙️ Configuration

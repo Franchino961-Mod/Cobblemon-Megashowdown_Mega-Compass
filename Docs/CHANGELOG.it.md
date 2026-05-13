@@ -19,7 +19,7 @@ e questo progetto segue il [Semantic Versioning](https://semver.org/spec/v2.0.0.
 
 ---
 
-## [2.1.0] - 6 Maggio 2026 (3D Rendering & Refactoring Update)
+## [2.0.0] - 13 Maggio 2026 (Major 3D & Refactoring Update)
 
 ### Aggiunto
 - **Modelli 3D Dinamici**: Migrazione completa dal vecchio sistema di animazione 2D a 32 frame a un sistema di rendering 3D dinamico e moderno.
@@ -28,28 +28,21 @@ e questo progetto segue il [Semantic Versioning](https://semver.org/spec/v2.0.0.
 - **Sicurezza Migliorata**: Aggiunta la validazione lato server per le richieste di ricerca, prevenendo l'invio di pacchetti malevoli dal client.
 - **Robustezza e Performance**: Implementata una gestione dei worker thread-safe con un limite globale di 100 worker attivi per proteggere la stabilità del server.
 - **Miglioramenti GUI & UX**: Riprogettata l'interfaccia di selezione con posizionamento relativo e aggiunto un messaggio di feedback in tempo reale nella barra dei messaggi (hotbar).
-
-### Modificato
-- **Ottimizzazione Risorse**: Ridotto significativamente il peso della mod eliminando centinaia di file JSON e texture di frame ridondanti.
-- **Personalizzazione Texture Migliorata**: Ogni bussola ora utilizza un singolo file di texture dedicato (`.png`), rendendo estremamente semplice per gli utenti creare ricolorazioni o texture personalizzate di alta qualità.
-- **Raffinamento Tecnico**: Rimossi i componenti dati ridondanti, risolti tutti i warning dell'IDE e pinate le dipendenze di build (Loom 1.8.13) a versioni stabili.
-
----
-
-## [2.0.0] - 23 Marzo 2026 (Major Update)
-
-### Aggiunto
 - **Localizzazione Globale**: Aggiunto il supporto ufficiale per 6 nuove lingue: Spagnolo (ES), Francese (FR), Tedesco (DE), Portoghese Brasiliano (PT-BR), Russo (RU) e Cinese Semplificato (ZH-CN). La mod ora supporta 8 lingue in totale.
 
 ### Modificato
-- **Mod Rename Totale**: Rinominata l'intera mod da "Meteorite Compass" a "Mega Compass" per includere concettualmente meglio il Wishing Weald. 
-- **Namespace Update**: Tutti gli ID interni, gli items, le cartelle sorgenti, le chiavi lingua (lang) e i pacchetti dati ora usano nativamente il namespace `mega_compass`.
-- **Bussola Combinata**: La bussola che unisce le 3 specializzazioni ora è ufficialmente chiamata "Mega Bussola" (`mega_compass`).
-- **Rifacimento HUD**: L'interfaccia a schermo (HUD) è stata completamente riprogettata. Le informazioni di ricerca ora sono incolonnate in alto a sinistra, con le etichette in bianco e i valori in grigio chiaro.
+- **Mod Rename Engine**: Rinominata completamente la mod da "Meteorite Compass" a "Mega Compass".
+- **Aggiornamento Namespace**: Tutti gli ID interni, i registri degli oggetti, le cartelle delle risorse, le chiavi di traduzione e i pacchetti dati ora utilizzano il namespace `mega_compass`.
+- **Bussola Unificata**: La bussola combinata è ora ufficialmente conosciuta come "Mega Bussola".
+- **Riprogettazione HUD**: Riprogettata completamente la visualizzazione a schermo. L'interfaccia ora presenta una lista verticale pulita e allineata in alto a sinistra con etichette bianche e valori grigio chiaro.
+- **Ottimizzazione Risorse**: Ridotto significativamente il peso della mod eliminando centinaia di file JSON e texture di frame ridondanti.
+- **Personalizzazione Texture Migliorata**: Ogni bussola ora utilizza un singolo file di texture dedicato (`.png`), rendendo estremamente semplice per gli utenti creare ricolorazioni o texture personalizzate di alta qualità.
+- **Refactoring dei Modelli**: Implementato un sistema di template (`preset`) per i modelli della base e del puntatore, riducendo drasticamente la duplicazione del codice JSON e facilitando la manutenzione globale dei modelli 3D.
+- **Raffinamento Tecnico**: Rimossi i componenti dati ridondanti, risolti tutti i warning dell'IDE e pinate le dipendenze di build (Loom 1.8.13) a versioni stabili.
 
-### Corretto
-- **Animazione Ago della Bussola**: Fissato il bug critico di rendering per cui l'ago della bussola restava sempre fermo sul frame 0. I JSON dei modelli radice sono stati corretti per interpretare correttamente il predicate `mega_compass:compass_angle`, permettendo all'ago di puntare in tempo reale verso la struttura.
-- **Fix Tremolio Ago**: L'ago della bussola non trema più in maniera frenetica e caotica ad ogni frame quando non c'è nessuna ricerca attiva o se il target non viene trovato. Ora resta stabilmente al suo posto.
+### Risolto
+- **Animazione Ago della Bussola**: Risolto un problema critico di rendering in cui l'ago della bussola rimaneva bloccato. I modelli degli oggetti sono stati corretti per interpretare correttamente il predicato `mega_compass:compass_angle` in modo che l'ago punti fluidamente verso il meteorite più vicino.
+- **Fix Jitter dell'Ago**: L'ago della bussola non trema più freneticamente ogni frame quando è inattivo o quando non viene trovato un meteorite. Ora riposa tranquillamente nella sua posizione predefinita.
 
 ---
 
@@ -116,11 +109,9 @@ e questo progetto segue il [Semantic Versioning](https://semver.org/spec/v2.0.0.
 - [x] Fix texture e icone personalizzate 
 - [x] Funzionamento corretto orientamento ago
 
-### Fase 3 - Avanzato (v2.0.0) ✅
+### Fase 3 - Avanzato & Rendering (v2.0.0) ✅
 - [x] Refactoring totale Namespace ID e Classi
 - [x] Rename finale mod in "Mega Compass" per coerenza tematica
-
-### Fase 4 - Integrazione & Rendering (v2.1.0) ✅
 - [x] Migrazione a Modelli 3D dinamici (stile AE2)
 - [x] Ottimizzazione degli asset e delle performance
 - [ ] Tracking strutture visitate per evitarne il ri-lookup

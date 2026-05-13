@@ -19,7 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [2.1.0] - May 6, 2026 (3D Rendering & Refactoring Update)
+## [2.0.0] - May 13, 2026 (Major 3D & Refactoring Update)
 
 ### Added
 - **Dynamic 3D Models**: Complete migration from the old static 32-frame 2D animation system to a modern, dynamic 3D rendering system.
@@ -28,17 +28,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Improved Security**: Added server-side validation for structure search requests to prevent malicious client packets from being processed.
 - **Robustness & Performance**: Implemented thread-safe worker management with a global limit of 100 active search workers to protect server stability.
 - **GUI & UX Enhancements**: Redesigned the structure selection GUI with relative layout positioning and added real-time search feedback in the player's hotbar.
-
-### Changed
-- **Resource Optimization**: Significantly reduced mod size by removing hundreds of redundant JSON files and frame textures.
-- **Improved Texture Customization**: Each compass now uses a dedicated single-texture system (one `.png` per compass), making it extremely easy for users to create high-quality recolors or custom textures.
-- **Technical Refinement**: Removed redundant data components, fixed IDE lint warnings, and pinned build dependencies (Fabric Loom 1.8.13) to stable versions.
-
----
-
-## [2.0.0] - March 23, 2026 (Major Update)
-
-### Added
 - **Global Localization**: Added official support for 6 new languages: Spanish (ES), French (FR), German (DE), Brazilian Portuguese (PT-BR), Russian (RU), and Simplified Chinese (ZH-CN). The mod now supports 8 languages in total.
 
 ### Changed
@@ -46,6 +35,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Namespace Update**: All internal IDs, item registries, resource folders, language keys, and data packets now use the `mega_compass` namespace.
 - **Unified Compass**: The combined compass is now officially known as the "Mega Compass".
 - **HUD Redesign**: Completely redesigned the on-screen display. The UI now features a clean, top-left aligned vertical list with white labels and light-gray values.
+- **Resource Optimization**: Significantly reduced mod size by removing hundreds of redundant JSON files and frame textures.
+- **Improved Texture Customization**: Each compass now uses a dedicated single-texture system (one `.png` per compass), making it extremely easy for users to create high-quality recolors or custom textures.
+- **Model Refactoring**: Implemented a template system (`preset`) for the base and pointer models, drastically reducing JSON code duplication and simplifying global maintenance of 3D models.
+- **Technical Refinement**: Removed redundant data components, fixed IDE lint warnings, and pinned build dependencies (Fabric Loom 1.8.13) to stable versions.
 
 ### Fixed
 - **Compass Needle Animation**: Fixed a critical rendering issue where the compass needle remained frozen. The root Item models were corrected to properly interpret the `mega_compass:compass_angle` predicate so the needle smoothly points toward the nearest meteorite.
@@ -117,17 +110,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [x] Working needle animations
 - [x] Individual compass textures
 
-### Phase 3 - Advanced (v2.0.0) ✅
+### Phase 3 - Advanced & Rendering (v2.0.0) ✅
 - [x] Mod ID separation and Full Rename to Mega Compass
 - [x] Codebase Cleanup and Refactor
-
-### Phase 4 - Integration & Rendering (v2.1.0) ✅
 - [x] Migration to Dynamic 3D Models (AE2-style)
 - [x] Asset and Performance Optimization
 - [ ] Visited structure tracking
 - [ ] JEI/REI integration
 - [ ] Custom particle effects matching meteorite types
 - [ ] Support for non-overworld structure types
+- [ ] Implementation Json configuration
 
 ---
 

@@ -17,9 +17,10 @@ dependencies {
     mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-    
-    // CobblemonMegaShowdown dependency (optional)
-    // modImplementation "com.mega_showdown:fabric:${project.mega_showdown_version}"
+
+    // CobblemonMegaShowdown - richiesta per le strutture (megaroid, mega_site, wishing_weald)
+    // Decommentare e impostare mega_showdown_version in gradle.properties quando disponibile su maven
+    // modCompileOnly "com.mega_showdown:fabric:${project.mega_showdown_version}"
 }
 
 processResources {
@@ -32,6 +33,7 @@ processResources {
 
 tasks.withType(JavaCompile).configureEach {
     it.options.release = 21
+    it.options.encoding = 'UTF-8'
 }
 
 java {
@@ -43,6 +45,6 @@ java {
 
 jar {
     from("LICENSE") {
-        rename { "${it}_${project.archivesBaseName}"}
+        rename { "${it}_${project.archivesBaseName}" }
     }
 }

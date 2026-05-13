@@ -1,0 +1,24 @@
+# Forza LF su tutti i file di testo
+* text=auto eol=lf
+
+# Java e Groovy
+*.java text eol=lf
+*.groovy text eol=lf
+*.gradle text eol=lf
+
+# Risorse
+*.json text eol=lf
+*.properties text eol=lf
+*.md text eol=lf
+*.txt text eol=lf
+
+# Script
+gradlew text eol=lf
+*.bat text eol=crlf
+
+# Binari — non toccare
+*.png binary
+*.jpg binary
+*.jar binary
+*.zip binary
+*.class binary

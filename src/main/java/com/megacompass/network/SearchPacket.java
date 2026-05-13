@@ -2,6 +2,7 @@ package com.megacompass.network;
 
 import com.megacompass.MegaCompass;
 import com.megacompass.item.MegaCompassItem;
+import com.megacompass.util.StructureUtils;
 
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.item.ItemStack;
@@ -16,7 +17,8 @@ public record SearchPacket(String structureId) implements CustomPayload {
     public static final Id<SearchPacket> TYPE = new Id<>(
             Identifier.of(MegaCompass.MODID, "search"));
 
-    public static final PacketCodec<RegistryByteBuf, SearchPacket> CODEC = PacketCodec.of(SearchPacket::write,
+    public static final PacketCodec<RegistryByteBuf, SearchPacket> CODEC = PacketCodec.of(
+            SearchPacket::write,
             SearchPacket::read);
 
     public static SearchPacket read(RegistryByteBuf buf) {
@@ -29,25 +31,40 @@ public record SearchPacket(String structureId) implements CustomPayload {
 
     public static void handle(SearchPacket packet, ServerPlayNetworking.Context context) {
         context.server().execute(() -> {
+            // Cast sicuro con instanceof
+            if (!(context.player().getWorld() instanceof ServerWorld serverWorld)) {
+                MegaCompass.LOGGER.warn("SearchPacket ricevuto da {} ma il mondo non è un ServerWorld.",
+                        context.player().getName().getString());
+                return;
+            }
+
+            // Valida l'ID struttura prima di usarlo
+            Identifier targetId;
+            try {
+                targetId = Identifier.of(packet.structureId());
+            } catch (Exception e) {
+                MegaCompass.LOGGER.warn("Player {} ha inviato un structureId malformato: {}",
+                        context.player().getName().getString(), packet.structureId());
+                return;
+            }
+
+            if (!targetId.equals(StructureUtils.MEGAROID) &&
+                !targetId.equals(StructureUtils.MEGA_SITE) &&
+                !targetId.equals(StructureUtils.WISHING_WEALD)) {
+                MegaCompass.LOGGER.warn("Player {} ha inviato un ID struttura non valido: {}",
+                        context.player().getName().getString(), targetId);
+                return;
+            }
+
+            // Cerca in mano principale, poi in mano secondaria
             ItemStack stack = context.player().getMainHandStack();
             if (stack.isEmpty() || !(stack.getItem() instanceof MegaCompassItem)) {
                 stack = context.player().getOffHandStack();
             }
 
             if (!stack.isEmpty() && stack.getItem() instanceof MegaCompassItem compass) {
-                Identifier targetId = Identifier.of(packet.structureId());
-                
-                // Point 3: Validate structure ID
-                if (!targetId.equals(com.megacompass.util.StructureUtils.MEGAROID) &&
-                    !targetId.equals(com.megacompass.util.StructureUtils.MEGA_SITE) &&
-                    !targetId.equals(com.megacompass.util.StructureUtils.WISHING_WEALD)) {
-                    MegaCompass.LOGGER.warn("Player {} sent invalid search target ID: {}", 
-                            context.player().getName().getString(), targetId);
-                    return;
-                }
-
-                compass.searchForMeteoriteStructures(
-                        (ServerWorld) context.player().getWorld(),
+                compass.searchForStructure(
+                        serverWorld,
                         context.player(),
                         context.player().getBlockPos(),
                         stack,

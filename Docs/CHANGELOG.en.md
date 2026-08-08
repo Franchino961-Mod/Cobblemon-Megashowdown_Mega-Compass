@@ -1,47 +1,53 @@
-# Changelog - Mega Compass
+# Changelog
 
 All notable changes to the **Mega Compass** mod will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.1.0] - 2026-08-07
+## [1.1.0] - 2026-08-08
 
 ### Added
-- **Observatory & Archaeological Site Structures**: Integrated search support for the Observatory (`mega_showdown:observatory`) and Archaeological Site (`mega_showdown:archaeological_site`) structures.
-- **New Dedicated Compasses**: Added the Observatory Compass (`observatory_compass`) and Archaeological Compass (`archaeological_compass`) with dedicated 3D item models, textures, and crafting recipes.
-- **GUI Selection Expansion**: Expanded the Mega Compass GUI panel height from 170px to 220px and added interactive selection buttons for both Observatory and Archaeological Site.
-- **Global Translations**: Added localized translation keys across all 8 supported languages (`de_de`, `en_us`, `es_es`, `fr_fr`, `it_it`, `pt_br`, `ru_ru`, `zh_cn`) for the new compass items and structure names.
+- **Client Initializer & Entrypoint**: Added `MegaCompassClient` (`com.megacompass.client.MegaCompassClient`) implementing `ClientModInitializer` to register the screen opener callback for `MegaCompassScreen`.
+- **Real-Time 3D Angle Calculation**: Added `MegaCompassClient.getCompassAngle(...)` calculating real-time compass rotation toward target structure coordinates relative to player position and yaw.
+- **3D Composite Model Renderer**: Added `MegaCompassModel` unbaked model loader and `MegaCompassBakedModel` 3D composite renderer for custom item model baking.
+- **Dynamic Status Tooltip**: Enhanced `MegaCompassItem.appendTooltip(...)` to dynamically display search status (Searching with radius and sample count, Found with exact X/Z target coordinates, Not Found within search radius, or Inactive lore) using translatable components.
+- **Observatory & Archaeological Site Support**: Added support for searching Observatory (`mega_showdown:observatory`) and Archaeological Site (`mega_showdown:archaeological_site`) structures.
+- **New Compass Items & Models**: Added Observatory Compass (`observatory_compass`) and Archaeological Compass (`archaeological_compass`) along with model definitions (`observatory_compass.json`, `observatory_compass_base.json`, `archaeological_compass.json`, `archaeological_compass_base.json`).
+- **New Crafting Recipes**: Added crafting recipes for Observatory Compass (`observatory_compass.json`) and Archaeological Compass (`archaeological_compass.json`).
 
 ### Changed
-- **Network Packet Validation**: Updated `SearchPacket` server-side validation to recognize and process search requests for the new structure IDs.
-- **Structure Registry Utilities**: Updated `StructureUtils` to register Observatory and Archaeological Site identifiers and handle their display names.
-- **Mega Compass Recipe**: Updated the combined Mega Compass recipe (`mega_compass.json`) to incorporate the new structure compasses into its crafting tree.
+- **Expanded Selection GUI**: Increased `MegaCompassScreen` panel height from 170px to 220px and added selection buttons for Observatory and Archaeological Site with relative coordinate positioning.
+- **Updated Main Initializer**: Updated `MegaCompass` main class to register new compass items, custom creative tab entries, and data components.
+- **Updated Combined Recipe**: Updated master `MegaCompass` recipe (`mega_compass.json`) to require all 5 individual structure compasses.
+- **Updated Structure Utilities & Packet**: Updated `StructureUtils` and `SearchPacket` to register and validate target identifiers for Observatory and Archaeological Site.
+- **Updated Translations**: Updated translation files across all 8 supported languages (`en_us`, `it_it`, `de_de`, `es_es`, `fr_fr`, `pt_br`, `ru_ru`, `zh_cn`).
+
+### Fixed
+- **Gitignore Pattern Fix**: Fixed `.gitignore` rule for `client/` pattern (changed to `/client/`) so `src/main/java/com/megacompass/client/` package and its client rendering classes are properly tracked by Git.
+- **Client Loading Crash Fix**: Fixed startup crash (`ClassNotFoundException` for `MegaCompassClient`) during client initialization.
+
+### Removed
+- **Obsolete Models & Textures**: Removed obsolete pointer model overrides (`mega_compass_pointer.json`, etc.) and unused static 2D texture files in favor of the dynamic 3D baked model system.
 
 ---
 
 ## [1.0.0] - 2026-05-13
 
 ### Added
-- **Dynamic 3D Models**: Complete migration from the old static 32-frame 2D animation system to a modern, dynamic 3D rendering system.
-- **Pointer Rendering**: Implemented a custom `BakedModel` and `FabricBakedModel` system that mathematically calculates the needle's rotation in real-time based on player position and compass state.
-- **Multiplayer Independence**: Completely refactored internal search logic to support multiple players simultaneously without interference using a UUID-based worker registry.
-- **Robustness & Security**: Implemented thread-safe worker management with a global limit of 100 active search workers and added server-side packet validation.
-- **GUI & UX Enhancements**: Redesigned structure selection GUI with relative layout positioning and added real-time search feedback in player hotbar.
-- **Global Localization**: Added official support for 6 new languages: Spanish (`es_es`), French (`fr_fr`), German (`de_de`), Brazilian Portuguese (`pt_br`), Russian (`ru_ru`), and Simplified Chinese (`zh_cn`), bringing total language support to 8.
+- **Dynamic 3D Models**: Migrated from static 2D frame animations to a dynamic 3D rendering system combining base presets (`compass_base_preset.json`) and pointer presets (`compass_pointer_preset.json`).
+- **Multiplayer Thread Safety**: Implemented `WorldWorkerManager` with `CopyOnWriteArrayList` thread-safe worker registry supporting concurrent player searches up to a global cap of 100 workers.
+- **Global Localization**: Added official localization for 6 new languages (`es_es`, `fr_fr`, `de_de`, `pt_br`, `ru_ru`, `zh_cn`), bringing total supported languages to 8.
+- **Hotbar Search Feedback**: Added overlay messages displayed above the player hotbar when selecting a target structure in the GUI.
 
 ### Changed
-- **Mod Rename**: Completely renamed mod from "Meteorite Compass" to "Mega Compass" across codebase, namespaces, item registries, resource folders, language keys, and data packets.
-- **Unified Compass**: Combined compass renamed officially to "Mega Compass".
-- **HUD Redesign**: Redesigned on-screen display to a clean, top-left aligned vertical list with white labels and light-gray values.
-- **Resource Optimization**: Significantly reduced mod size by removing hundreds of redundant JSON files and frame textures.
-- **Texture Customization**: Each compass now uses a dedicated single-texture system (`.png`), allowing easy recolors and custom texture creation.
-- **Model Refactoring**: Implemented template preset system for base and pointer models, drastically reducing JSON duplication.
-- **Technical Refinement**: Removed redundant data components, fixed IDE lint warnings, and pinned Fabric Loom 1.8.13 build dependency.
+- **Mod Rebrand**: Renamed mod from "Meteorite Compass" to "Mega Compass" (`mega_compass`) across all packages, namespaces, item IDs, components, and data packs.
+- **Master Item Name**: Renamed combined compass item to "Mega Compass".
+- **Model Preset Refactoring**: Created reusable model template presets to eliminate code duplication across JSON model definitions.
 
 ### Fixed
-- **Compass Needle Animation**: Fixed critical rendering issue where needle remained frozen by correcting root item models to interpret `mega_compass:compass_angle` predicate.
-- **Needle Jitter Fix**: Prevented needle from frantically shaking when inactive or when structure is not found, returning it to default resting position.
+- **Frozen Needle Fix**: Fixed needle rendering issue by updating model predicates for `compass_angle`.
+- **Needle Jitter Fix**: Resolved needle jittering when inactive or when structure is not found.
 
 ---
 
@@ -49,7 +55,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - **Network Packet Crash**: Resolved client crash (`ClassCastException`) during network packet serialization by migrating to `RegistryByteBuf`.
-- **GUI Selection Logic**: Fixed bug where clicking "Mega Site" in the GUI incorrectly defaulted to searching for "Megaroid".
+- **GUI Selection Bug**: Fixed bug where clicking "Mega Site" in the GUI defaulted to searching for "Megaroid".
 - **GUI Text Rendering**: Fixed missing translations and blurry text rendering within selection screen.
 
 ---
@@ -57,41 +63,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.1.0] - 2026-02-25
 
 ### Added
-- **Core Functionality**: Added initial compass item locating CobblemonMegaShowdown structures (`megaroid` and `mega_site`). Right-click activates search; Shift + right-click resets compass.
-- **Advanced Search System**: Implemented `WorldWorkerManager` and `RandomSpreadSearchWorker` using spiral search algorithm up to 10,000 block radius non-blocking.
-- **User Experience**: Added real-time HUD display showing sample count, radius, distance, and color-coded status feedback.
-- **Crafting Recipe**: Added recipe using vanilla materials (Iron, Amethyst, Glowstone, Compass).
-- **Localization**: Added English (`en_us`) and Italian (`it_it`) language files.
-- **Commands**: Added `/meteoritecompass reset` and `/meteoritecompass info` commands.
-
----
-
-## Development Roadmap
-
-### Phase 1 - Core (v0.1.0) ✅
-- Project bootstrap and Fabric 1.21.1 setup.
-- Structure search worker implementation.
-- Basic commands and initial localization.
-
-### Phase 2 - Multi-Compass & GUI (v0.1.1) ✅
-- Dedicated compass items per structure type.
-- Combined compass with selection GUI.
-- Fixed needle orientation animations.
-
-### Phase 3 - 3D Engine & Rebrand (v1.0.0) ✅
-- Full mod rename to Mega Compass.
-- Dynamic 3D model baking system for pointer needle.
-- Multiplayer thread-safe worker registry.
-- Global 8-language localization.
-
-### Phase 4 - Expansion & Feature Set (v1.1.0) 📋
-- Support for Observatory and Archaeological Site structures.
-- Extended GUI selection panel and recipes.
-- Visited structure tracking system.
-- Sound effects and custom particle indicators.
-- External JSON configuration system.
-
----
-
-*Format: [Version] - Date*  
-*Categories: Added, Changed, Fixed, Removed, Technical*
+- **Initial Release**: Added initial Meteorite Compass mod implementation for Cobblemon MegaShowdown structures (`megaroid` and `mega_site`).
+- **Non-Blocking Search**: Implemented async spiral search algorithm (`RandomSpreadSearchWorker`, `SearchWorkerManager`) up to a 10,000 block search radius.
+- **Selection GUI**: Added interactive structure selection GUI screen (`MegaCompassScreen`) and C2S packet handling (`SearchPacket`).
+- **Crafting Recipes & Lang**: Added vanilla recipes (Iron, Amethyst, Glowstone, Compass) and initial English (`en_us`) and Italian (`it_it`) localization files.

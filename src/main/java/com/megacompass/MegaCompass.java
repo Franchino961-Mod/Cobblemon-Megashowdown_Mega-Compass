@@ -35,6 +35,8 @@ public class MegaCompass implements ModInitializer {
 	public static MegaCompassItem MEGA_SITE_COMPASS;
 	public static MegaCompassItem MEGAROID_COMPASS;
 	public static MegaCompassItem WISHING_WEALD_COMPASS;
+	public static MegaCompassItem OBSERVATORY_COMPASS;
+	public static MegaCompassItem ARCHAEOLOGICAL_COMPASS;
 	public static MegaCompassItem MEGA_COMPASS;
 	public static net.minecraft.item.ItemGroup MEGA_COMPASS_TAB;
 	public static net.minecraft.registry.RegistryKey<net.minecraft.item.ItemGroup> MEGA_COMPASS_TAB_KEY;
@@ -98,6 +100,18 @@ public class MegaCompass implements ModInitializer {
 				new MegaCompassItem(new Item.Settings().maxCount(1), com.megacompass.util.StructureUtils.WISHING_WEALD,
 						false));
 
+		OBSERVATORY_COMPASS = Registry.register(
+				Registries.ITEM,
+				Identifier.of(MODID, "observatory_compass"),
+				new MegaCompassItem(new Item.Settings().maxCount(1), com.megacompass.util.StructureUtils.OBSERVATORY,
+						false));
+
+		ARCHAEOLOGICAL_COMPASS = Registry.register(
+				Registries.ITEM,
+				Identifier.of(MODID, "archaeological_compass"),
+				new MegaCompassItem(new Item.Settings().maxCount(1), com.megacompass.util.StructureUtils.ARCHAEOLOGICAL_SITE,
+						false));
+
 		MEGA_COMPASS = Registry.register(
 				Registries.ITEM,
 				Identifier.of(MODID, "mega_compass"),
@@ -118,6 +132,8 @@ public class MegaCompass implements ModInitializer {
 			content.add(MEGA_SITE_COMPASS);
 			content.add(MEGAROID_COMPASS);
 			content.add(WISHING_WEALD_COMPASS);
+			content.add(OBSERVATORY_COMPASS);
+			content.add(ARCHAEOLOGICAL_COMPASS);
 			content.add(MEGA_COMPASS);
 		});
 
@@ -142,7 +158,7 @@ public class MegaCompass implements ModInitializer {
 	}
 
 	public static List<MegaCompassItem> getAllCompassItems() {
-		return List.of(MEGA_SITE_COMPASS, MEGAROID_COMPASS, WISHING_WEALD_COMPASS, MEGA_COMPASS);
+		return List.of(MEGA_SITE_COMPASS, MEGAROID_COMPASS, WISHING_WEALD_COMPASS, OBSERVATORY_COMPASS, ARCHAEOLOGICAL_COMPASS, MEGA_COMPASS);
 	}
 
 	public static boolean isMegaCompassItem(ItemStack stack) {

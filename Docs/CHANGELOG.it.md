@@ -2,123 +2,94 @@
 
 Tutti i cambiamenti notevoli alla mod **Mega Compass** saranno documentati in questo file.
 
-Il formato è basato su [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+Il formato è basato su [Keep a Changelog](https://keepachangelog.com/it/1.1.0/),
 e questo progetto segue il [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2026-08-07
+
+### Aggiunto
+- **Strutture Osservatorio e Sito Archeologico**: Integrato il supporto alla ricerca delle strutture Osservatorio (`mega_showdown:observatory`) e Sito Archeologico (`mega_showdown:archaeological_site`).
+- **Nuove Bussole Dedicate**: Aggiunte la Bussola dell'Osservatorio (`observatory_compass`) e la Bussola del Sito Archeologico (`archaeological_compass`) complete di modelli 3D dedicati, texture e ricette di crafting.
+- **Espansione Pannello GUI**: Aumentata l'altezza della GUI della Mega Bussola da 170px a 220px e aggiunti i pulsanti interattivi di selezione per l'Osservatorio e il Sito Archeologico.
+- **Localizzazione Globale**: Aggiunte le chiavi di traduzione in tutte e 8 le lingue supportate (`de_de`, `en_us`, `es_es`, `fr_fr`, `it_it`, `pt_br`, `ru_ru`, `zh_cn`) per i nuovi oggetti bussola e nomi delle strutture.
+
+### Modificato
+- **Validazione Pacchetti di Rete**: Aggiornata la validazione lato server in `SearchPacket` per riconoscere ed elaborare le richieste di ricerca dei nuovi ID struttura.
+- **Utility Registro Strutture**: Aggiornato `StructureUtils` per registrare gli identificatori dell'Osservatorio e del Sito Archeologico e gestirne i nomi visualizzati.
+- **Ricetta Mega Bussola**: Aggiornata la ricetta di crafting della Mega Bussola combinata (`mega_compass.json`) per incorporare le nuove bussole nella struttura di crafting.
+
 ---
 
-## [Non Rilasciato]
-
-### Pianificato
-- Sistema di configurazione JSON
-- Tracciamento strutture visitate
-- Effetti particelle quando meteorite localizzato
-- Effetti sonori per feedback ricerca
-- Integrazione ricette JEI/REI/EMI
-- Sistema comandi per debug
-
----
-
-## [2.0.0] - 13 Maggio 2026 (Major 3D & Refactoring Update)
+## [1.0.0] - 2026-05-13
 
 ### Aggiunto
 - **Modelli 3D Dinamici**: Migrazione completa dal vecchio sistema di animazione 2D a 32 frame a un sistema di rendering 3D dinamico e moderno.
-- **Rendering Ago**: Implementato un sistema custom di `BakedModel` e `FabricBakedModel` che calcola matematicamente la rotazione dell'ago in tempo reale in base alla posizione del giocatore e dello stato della bussola.
+- **Rendering Ago**: Implementato un sistema custom di `BakedModel` e `FabricBakedModel` che calcola matematicamente la rotazione dell'ago in tempo reale in base alla posizione del giocatore e allo stato della bussola.
 - **Indipendenza Multiplayer**: Logica di ricerca rifatta da zero per supportare più giocatori contemporaneamente senza interferenze, utilizzando un registro dei worker basato su UUID.
-- **Sicurezza Migliorata**: Aggiunta la validazione lato server per le richieste di ricerca, prevenendo l'invio di pacchetti malevoli dal client.
-- **Robustezza e Performance**: Implementata una gestione dei worker thread-safe con un limite globale di 100 worker attivi per proteggere la stabilità del server.
+- **Robustezza e Sicurezza**: Implementata una gestione dei worker thread-safe con un limite globale di 100 worker attivi e aggiunta la validazione dei pacchetti lato server.
 - **Miglioramenti GUI & UX**: Riprogettata l'interfaccia di selezione con posizionamento relativo e aggiunto un messaggio di feedback in tempo reale nella barra dei messaggi (hotbar).
-- **Localizzazione Globale**: Aggiunto il supporto ufficiale per 6 nuove lingue: Spagnolo (ES), Francese (FR), Tedesco (DE), Portoghese Brasiliano (PT-BR), Russo (RU) e Cinese Semplificato (ZH-CN). La mod ora supporta 8 lingue in totale.
+- **Localizzazione Globale**: Aggiunto il supporto ufficiale per 6 nuove lingue: Spagnolo (`es_es`), Francese (`fr_fr`), Tedesco (`de_de`), Portoghese Brasiliano (`pt_br`), Russo (`ru_ru`) e Cinese Semplificato (`zh_cn`), portando il supporto totale a 8 lingue.
 
 ### Modificato
-- **Mod Rename Engine**: Rinominata completamente la mod da "Meteorite Compass" a "Mega Compass".
-- **Aggiornamento Namespace**: Tutti gli ID interni, i registri degli oggetti, le cartelle delle risorse, le chiavi di traduzione e i pacchetti dati ora utilizzano il namespace `mega_compass`.
+- **Mod Rename**: Rinominata completamente la mod da "Meteorite Compass" a "Mega Compass" in tutto il codice, namespace, registri oggetti, cartelle risorse, chiavi di traduzione e pacchetti dati.
 - **Bussola Unificata**: La bussola combinata è ora ufficialmente conosciuta come "Mega Bussola".
-- **Riprogettazione HUD**: Riprogettata completamente la visualizzazione a schermo. L'interfaccia ora presenta una lista verticale pulita e allineata in alto a sinistra con etichette bianche e valori grigio chiaro.
+- **Riprogettazione HUD**: Riprogettata completamente la visualizzazione a schermo con una lista verticale pulita e allineata in alto a sinistra con etichette bianche e valori grigio chiaro.
 - **Ottimizzazione Risorse**: Ridotto significativamente il peso della mod eliminando centinaia di file JSON e texture di frame ridondanti.
-- **Personalizzazione Texture Migliorata**: Ogni bussola ora utilizza un singolo file di texture dedicato (`.png`), rendendo estremamente semplice per gli utenti creare ricolorazioni o texture personalizzate di alta qualità.
-- **Refactoring dei Modelli**: Implementato un sistema di template (`preset`) per i modelli della base e del puntatore, riducendo drasticamente la duplicazione del codice JSON e facilitando la manutenzione globale dei modelli 3D.
-- **Raffinamento Tecnico**: Rimossi i componenti dati ridondanti, risolti tutti i warning dell'IDE e pinate le dipendenze di build (Loom 1.8.13) a versioni stabili.
+- **Personalizzazione Texture**: Ogni bussola ora utilizza un singolo file di texture dedicato (`.png`), rendendo estremamente semplice per gli utenti creare ricolorazioni e texture personalizzate.
+- **Refactoring dei Modelli**: Implementato un sistema di template (`preset`) per i modelli della base e del puntatore, riducendo drasticamente la duplicazione del codice JSON.
+- **Raffinamento Tecnico**: Rimossi i componenti dati ridondanti, risolti tutti i warning dell'IDE e fissate le dipendenze di build (Loom 1.8.13).
 
 ### Risolto
-- **Animazione Ago della Bussola**: Risolto un problema critico di rendering in cui l'ago della bussola rimaneva bloccato. I modelli degli oggetti sono stati corretti per interpretare correttamente il predicato `mega_compass:compass_angle` in modo che l'ago punti fluidamente verso il meteorite più vicino.
-- **Fix Jitter dell'Ago**: L'ago della bussola non trema più freneticamente ogni frame quando è inattivo o quando non viene trovato un meteorite. Ora riposa tranquillamente nella sua posizione predefinita.
+- **Animazione Ago della Bussola**: Risolto problema critico di rendering in cui l'ago rimaneva bloccato, correggendo i modelli per interpretare il predicato `mega_compass:compass_angle`.
+- **Fix Jitter dell'Ago**: Risolto il tremolio dell'ago quando inattivo o quando la struttura non viene trovata, riportandolo alla posizione di riposo predefinita.
 
 ---
 
-## [1.0.1] - 27 Febbraio 2026 (Bugfix)
+## [0.1.1] - 2026-02-27
 
 ### Corretto
-- Risolto un crash del client (`ClassCastException`) nell'invio dei pacchetti passando a `RegistryByteBuf`
-- Risolta la logica della GUI che cercava sempre "Megaroid" indipendentemente dal pulsante selezionato (Mega Site)
-- Risolti problemi di traduzione mancante e testo sfocato (blur) nel pannello della GUI
+- **Crash Pacchetti di Rete**: Risolto crash del client (`ClassCastException`) durante la serializzazione dei pacchetti di rete passando a `RegistryByteBuf`.
+- **Logica Selezione GUI**: Corretto bug in cui cliccando su "Mega Site" nella GUI la ricerca impostava erroneamente "Megaroid".
+- **Rendering Testi GUI**: Risolti problemi di traduzione mancante e testo sfocato (blur) nel pannello della GUI.
 
 ---
 
-## [1.0.0] - 25 Febbraio 2026 (Release Iniziale)
+## [0.1.0] - 2026-02-25
 
 ### Aggiunto
-- **Funzionalità Core**
-  - Item Bussola che localizza meteoriti da CobblemonMegaShowdown
-  - Ricerca strutture per "mega_showdown:megaroid" (Y -32 a -20)
-  - Ricerca strutture per "mega_showdown:mega_site" (Y -19 a 5)
-  - Attivazione click destro per cercare meteorite più vicino
-  - Shift + click destro per resettare bussola
-
-- **Sistema di Ricerca Avanzato**
-  - WorldWorkerManager per coordinamento worker asincroni
-  - RandomSpreadSearchWorker con algoritmo ricerca a spirale
-  - Ricerca non-blocking fino a 10.000 blocchi di raggio
-  - Campionamento fino a 100.000 punti
-
-- **Esperienza Utente**
-  - Display HUD in tempo reale durante ricerca
-  - Mostra progresso (campioni, raggio) durante ricerca
-  - Mostra distanza quando meteorite trovato
-  - Feedback colore (bianco=ricerca, verde=trovato, rosso=non trovato)
-
-- **Ricetta di Crafting**
-  - Bussola craftabile con materiali vanilla: Ferro, Ametista, Glowstone, Bussola
-  
-- **Architettura Tecnica**
-  - Piattaforma: Fabric 1.21.1
-  - Fabric Loader: 0.16.9+
-  - Fabric API: 0.108.0+1.21.1
-
-- **Localizzazione**
-  - Italiano (it_it)
-  - Inglese (en_us)
-
-- **Comandi**
-  - `/meteoritecompass reset` - Cancella tracking meteoriti visitati
-  - `/meteoritecompass info` - Mostra stato bussola e target
+- **Funzionalità Core**: Aggiunto item bussola iniziale per localizzare le strutture di CobblemonMegaShowdown (`megaroid` e `mega_site`). Click destro attiva la ricerca, Shift + click destro resetta la bussola.
+- **Sistema di Ricerca Avanzato**: Implementati `WorldWorkerManager` e `RandomSpreadSearchWorker` con algoritmo a spirale non-blocking fino a 10.000 blocchi di raggio.
+- **Esperienza Utente**: Aggiunto display HUD in tempo reale con conteggio campioni, raggio, distanza e feedback a colori.
+- **Ricetta di Crafting**: Aggiunta ricetta con materiali vanilla (Ferro, Ametista, Glowstone, Bussola).
+- **Localizzazione**: Aggiunti file di lingua per Inglese (`en_us`) e Italiano (`it_it`).
+- **Comandi**: Aggiunti i comandi `/meteoritecompass reset` e `/meteoritecompass info`.
 
 ---
 
 ## Roadmap Sviluppo
 
-### Fase 1 - Core (v1.0.0) ✅
-- [x] Funzionalità base bussola
-- [x] Logica ricerca strutture
-- [x] Supporto multi-loader base
-- [x] Implementazione comandi shell
+### Fase 1 - Core (v0.1.0) ✅
+- Setup iniziale del progetto e configurazione Fabric 1.21.1.
+- Implementazione worker di ricerca strutture.
+- Comandi base e localizzazione iniziale.
 
-### Fase 2 - Polish (v1.1.0) ✅
-- [x] Bussole dedicate per ogni struttura
-- [x] Bussola combinata con GUI di selezione target
-- [x] Fix texture e icone personalizzate 
-- [x] Funzionamento corretto orientamento ago
+### Fase 2 - Multi-Bussola & GUI (v0.1.1) ✅
+- Bussole dedicate per ogni tipo di struttura.
+- Bussola combinata con GUI di selezione target.
+- Animazioni orientamento ago corrette.
 
-### Fase 3 - Avanzato & Rendering (v2.0.0) ✅
-- [x] Refactoring totale Namespace ID e Classi
-- [x] Rename finale mod in "Mega Compass" per coerenza tematica
-- [x] Migrazione a Modelli 3D dinamici
-- [x] Ottimizzazione degli asset e delle performance
-- [ ] Tracking strutture visitate per evitarne il ri-lookup
-- [ ] Integrazione JEI/REI per ricette
-- [ ] Effetti particellari direzionali e Suoni
-- [ ] Supporto datapack configurazione esteso
-- [ ] Implementazione Json configuration
+### Fase 3 - Engine 3D & Rebrand (v1.0.0) ✅
+- Rename completo mod in Mega Compass.
+- Sistema 3D dynamic model baking per l'ago puntatore.
+- Registro worker thread-safe per multiplayer.
+- Localizzazione globale in 8 lingue.
+
+### Fase 4 - Espansione & Funzionalità (v1.1.0) 📋
+- Supporto alle strutture Osservatorio e Sito Archeologico.
+- Estensione del pannello di selezione GUI e delle ricette.
+- Sistema di tracking delle strutture già visitate.
+- Effetti sonori e indicatori particellari personalizzati.
+- Sistema di configurazione JSON esterno.
 
 ---
 

@@ -193,14 +193,32 @@ public class MegaCompassItem extends Item {
             net.minecraft.item.tooltip.TooltipType tooltipType) {
         super.appendTooltip(stack, context, tooltip, tooltipType);
 
-        // Lore: una chiave per riga, così le traduzioni rimangono pulite e la
-        // formattazione non dipende da split("\n") su getString()
-        String baseKey = this.getTranslationKey() + ".lore";
-        Text loreText = Text.translatable(baseKey);
-        String loreString = loreText.getString();
-        for (String line : loreString.split("\n")) {
-            if (!line.isEmpty()) {
-                tooltip.add(Text.literal(line).withColor(0x7F7F7F));
+        CompassState state = getState(stack);
+        Identifier targetId = getStructureId(stack);
+
+        if (state == CompassState.FOUND && targetId != null) {
+            Text structureName = Text.translatable("string.mega_compass." + targetId.getPath());
+            int x = getFoundStructureX(stack);
+            int z = getFoundStructureZ(stack);
+            tooltip.add(Text.translatable("string.mega_compass.hud.found").append(": ").append(structureName).withColor(0x55FF55));
+            tooltip.add(Text.literal("X: " + x + ", Z: " + z).withColor(0xAAFFAA));
+        } else if (state == CompassState.SEARCHING && targetId != null) {
+            Text structureName = Text.translatable("string.mega_compass." + targetId.getPath());
+            int radius = getSearchRadius(stack);
+            int samples = getSamples(stack);
+            tooltip.add(Text.translatable("string.mega_compass.status.searching", structureName, Math.max(0, samples), Math.max(0, radius)).withColor(0xFFFF55));
+        } else if (state == CompassState.NOT_FOUND) {
+            int radius = getSearchRadius(stack);
+            int samples = getSamples(stack);
+            tooltip.add(Text.translatable("string.mega_compass.status.not_found", Math.max(0, radius), Math.max(0, samples)).withColor(0xFF5555));
+        } else {
+            String baseKey = this.getTranslationKey() + ".lore";
+            Text loreText = Text.translatable(baseKey);
+            String loreString = loreText.getString();
+            for (String line : loreString.split("\n")) {
+                if (!line.isEmpty()) {
+                    tooltip.add(Text.literal(line).withColor(0x7F7F7F));
+                }
             }
         }
     }

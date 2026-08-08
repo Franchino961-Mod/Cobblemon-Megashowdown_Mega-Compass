@@ -10,6 +10,12 @@
     },
     {
       "item": "mega_compass:wishing_weald_compass"
+    },
+    {
+      "item": "mega_compass:observatory_compass"
+    },
+    {
+      "item": "mega_compass:archaeological_compass"
     }
   ],
   "result": {

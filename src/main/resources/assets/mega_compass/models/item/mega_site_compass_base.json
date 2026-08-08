@@ -1,6 +1,6 @@
 {
   "parent": "mega_compass:item/compass_base_preset",
   "textures": {
-    "texture": "mega_compass:item/mega_site_compass"
+    "texture": "minecraft:block/chiseled_stone_bricks"
   }
 }

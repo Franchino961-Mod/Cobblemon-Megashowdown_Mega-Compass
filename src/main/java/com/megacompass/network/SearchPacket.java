@@ -50,7 +50,9 @@ public record SearchPacket(String structureId) implements CustomPayload {
 
             if (!targetId.equals(StructureUtils.MEGAROID) &&
                 !targetId.equals(StructureUtils.MEGA_SITE) &&
-                !targetId.equals(StructureUtils.WISHING_WEALD)) {
+                !targetId.equals(StructureUtils.WISHING_WEALD) &&
+                !targetId.equals(StructureUtils.OBSERVATORY) &&
+                !targetId.equals(StructureUtils.ARCHAEOLOGICAL_SITE)) {
                 MegaCompass.LOGGER.warn("Player {} ha inviato un ID struttura non valido: {}",
                         context.player().getName().getString(), targetId);
                 return;

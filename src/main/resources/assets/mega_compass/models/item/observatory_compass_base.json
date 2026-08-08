@@ -1,0 +1,6 @@
+{
+  "parent": "mega_compass:item/compass_base_preset",
+  "textures": {
+    "texture": "minecraft:block/lapis_block"
+  }
+}

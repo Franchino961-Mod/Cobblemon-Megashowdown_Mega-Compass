@@ -13,9 +13,11 @@ import net.minecraft.world.gen.structure.Structure;
 
 public class StructureUtils {
 
-    public static final Identifier MEGAROID      = Identifier.of("mega_showdown", "megaroid");
-    public static final Identifier MEGA_SITE     = Identifier.of("mega_showdown", "mega_site");
-    public static final Identifier WISHING_WEALD = Identifier.of("mega_showdown", "wishing_weald");
+    public static final Identifier MEGAROID            = Identifier.of("mega_showdown", "megaroid");
+    public static final Identifier MEGA_SITE           = Identifier.of("mega_showdown", "mega_site");
+    public static final Identifier WISHING_WEALD       = Identifier.of("mega_showdown", "wishing_weald");
+    public static final Identifier OBSERVATORY         = Identifier.of("mega_showdown", "observatory");
+    public static final Identifier ARCHAEOLOGICAL_SITE = Identifier.of("mega_showdown", "archaeological_site");
 
     /** Restituisce tutte le strutture di MegaShowdown presenti nel mondo corrente. */
     public static List<Structure> getAllTargetStructures(ServerWorld world) {
@@ -23,6 +25,8 @@ public class StructureUtils {
         addIfPresent(world, MEGAROID, structures);
         addIfPresent(world, MEGA_SITE, structures);
         addIfPresent(world, WISHING_WEALD, structures);
+        addIfPresent(world, OBSERVATORY, structures);
+        addIfPresent(world, ARCHAEOLOGICAL_SITE, structures);
         return structures;
     }
 
@@ -57,9 +61,11 @@ public class StructureUtils {
     public static String getStructureName(Identifier id) {
         if (id == null) return "Unknown";
 
-        if (id.equals(MEGAROID))       return "Megaroid";
-        if (id.equals(MEGA_SITE))      return "Mega Site";
-        if (id.equals(WISHING_WEALD))  return "Wishing Weald";
+        if (id.equals(MEGAROID))            return "Megaroid";
+        if (id.equals(MEGA_SITE))           return "Mega Site";
+        if (id.equals(WISHING_WEALD))       return "Wishing Weald";
+        if (id.equals(OBSERVATORY))         return "Observatory";
+        if (id.equals(ARCHAEOLOGICAL_SITE)) return "Archaeological Site";
 
         return id.getPath();
     }

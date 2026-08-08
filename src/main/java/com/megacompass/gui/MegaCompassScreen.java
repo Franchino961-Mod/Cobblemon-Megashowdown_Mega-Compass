@@ -15,7 +15,7 @@ import net.minecraft.util.Identifier;
 public class MegaCompassScreen extends Screen {
 
     private static final int PANEL_WIDTH = 260;
-    private static final int PANEL_HEIGHT = 170;
+    private static final int PANEL_HEIGHT = 220;
     private static final int BUTTON_WIDTH = 220;
     private static final int BUTTON_HEIGHT = 20;
     private static final int BUTTON_SPACING = 24;
@@ -53,6 +53,18 @@ public class MegaCompassScreen extends Screen {
                 Text.translatable("string.mega_compass.wishing_weald"),
                 button -> onStructureSelected(StructureUtils.WISHING_WEALD))
             .dimensions(firstButtonX, startButtonY + (BUTTON_SPACING * 2), BUTTON_WIDTH, BUTTON_HEIGHT).build());
+
+        // Observatory button
+        this.addDrawableChild(ButtonWidget.builder(
+                Text.translatable("string.mega_compass.observatory"),
+                button -> onStructureSelected(StructureUtils.OBSERVATORY))
+            .dimensions(firstButtonX, startButtonY + (BUTTON_SPACING * 3), BUTTON_WIDTH, BUTTON_HEIGHT).build());
+
+        // Archaeological Site button
+        this.addDrawableChild(ButtonWidget.builder(
+                Text.translatable("string.mega_compass.archaeological_site"),
+                button -> onStructureSelected(StructureUtils.ARCHAEOLOGICAL_SITE))
+            .dimensions(firstButtonX, startButtonY + (BUTTON_SPACING * 4), BUTTON_WIDTH, BUTTON_HEIGHT).build());
     }
 
     private void onStructureSelected(Identifier structureId) {

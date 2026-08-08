@@ -18,9 +18,6 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-    // CobblemonMegaShowdown - richiesta per le strutture (megaroid, mega_site, wishing_weald)
-    // Decommentare e impostare mega_showdown_version in gradle.properties quando disponibile su maven
-    // modCompileOnly "com.mega_showdown:fabric:${project.mega_showdown_version}"
 }
 
 processResources {

@@ -4,7 +4,7 @@
 [![Download on CurseForge](https://img.shields.io/badge/Download_on-CurseForge-orange?style=for-the-badge&logo=curseforge)](https://www.curseforge.com/minecraft/mc-mods/cobblemon-mega-showdown-meteorite-compass)
 
 [![Minecraft](https://img.shields.io/badge/Minecraft-1.21.1-green.svg)](https://www.minecraft.net/)
-[![Version](https://img.shields.io/badge/version-2.0.0-blue.svg)]()
+[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)]()
 [![Fabric](https://img.shields.io/badge/Fabric-0.17.2-blue.svg)](https://fabricmc.net/)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
@@ -21,7 +21,17 @@
 
 Tired of digging randomly hoping to find meteorites or wishing wealds? This mod adds **4 distinct compasses** that **point directly to the nearest structures**, complete with smoothly animating needles, making exploration focused and rewarding.
 
-### ✨ Key Features
+---
+
+## 🌟 Why Use Mega Compass?
+
+- **Save Time Exploring**: No more wandering randomly for thousands of blocks hoping to stumble upon deep underground structures.
+- **Visual & Fluid Navigation**: Includes smoothly animating 3D needles and real-time HUD indicators showing you the exact direction and distance.
+- **Lag-Free Server Performance**: Uses an optimized asynchronous search algorithm that runs entirely in the background, keeping your server's TPS stable.
+
+---
+
+## ✨ Main Features
 
 - 🧭 **Smart Navigation**: Points to nearest Megaroid, Mega Site, or Wishing Weald.
 - 🎯 **Four Compass Types**: Dedicated compasses for each structure type, plus a Combined Mega Compass that lets you choose your target via an intuitive GUI.
@@ -34,7 +44,7 @@ Tired of digging randomly hoping to find meteorites or wishing wealds? This mod 
 
 ---
 
-## 🎮 How It Works
+## 🚀 Quick Start
 
 ### Crafting the Compasses
 
@@ -84,22 +94,6 @@ The compasses can locate three types of crucial structures from CobblemonMegaSho
 
 ---
 
-## 📦 Installation
-
-### Requirements
-- **Minecraft**: 1.21.1
-- **Fabric Loader**: 0.17.2 or higher
-- **Fabric API**: 0.116.11 or higher
-- **CobblemonMegaShowdown**: Latest version (for the structures)
-- **Java**: 21 or higher
-
-### Steps
-1. Download and install [Fabric Loader](https://fabricmc.net/use/)
-2. Download [Fabric API](https://modrinth.com/mod/fabric-api)
-3. Download [CobblemonMegaShowdown](https://www.curseforge.com/minecraft/mc-mods/cobblemon-megashowdown)
-4. Place `mega_showdown-mega-compass-fabric-mc1.21.1-2.0.0.jar` in your `mods` folder
-5. Launch Minecraft and enjoy!
-
 ## ⚙️ Configuration
 
 > 📋 A full JSON configuration system is planned for a future version.
@@ -136,15 +130,34 @@ No structures found within <radius> blocks (<samples>)
 
 ---
 
-## 🧪 Performance Notes
+## 📦 Requirements
 
-- **Search Time**: Typically 100-500ms depending on world size
-- **Server Impact**: Minimal (<0.5ms per tick)
-- **Memory Usage**: ~5KB per active compass
+- **Minecraft**: 1.21.1
+- **Fabric Loader**: 0.17.2 or higher
+- **Fabric API**: 0.116.11 or higher
+- **CobblemonMegaShowdown**: Latest version (for the structures)
+- **Java**: 21 or higher
 
 ---
 
-## 🤝 Compatibility
+## 📥 Installation
+
+1. Download and install [Fabric Loader](https://fabricmc.net/use/)
+2. Download [Fabric API](https://modrinth.com/mod/fabric-api)
+3. Download [CobblemonMegaShowdown](https://www.curseforge.com/minecraft/mc-mods/cobblemon-megashowdown)
+4. Place `mega_showdown-mega-compass-fabric-mc1.21.1-1.0.0.jar` in your `mods` folder
+5. Launch Minecraft and enjoy!
+
+---
+
+## 🖥️ Client/Server Behavior
+
+- **Server**: Required. Executes the async search algorithms, tracks structure coordinates, and manages worker threads.
+- **Client**: Required. Renders the custom 3D compass needles, manages the compass selection GUI, and updates the search HUD display.
+
+---
+
+## 🤝 Compatibility & Modpack Notes
 
 ### Tested With
 - ✅ **CobblemonMegaShowdown**: Full integration
@@ -153,12 +166,27 @@ No structures found within <radius> blocks (<samples>)
 - ✅ **Fabric API**: Full compatibility
 - ✅ **Architectury API**: Multi-loader support
 
-### Known Issues
-- Compasses only find structures in **already-generated chunks**.
-- If no structure is found, explore new areas (generate new chunks) and try again.
-- Works only in the **Overworld** dimension.
+### Compatibility Notes
+- Works in both Singleplayer and Multiplayer.
+- **Modpacks**: You are free to distribute and include this mod in any modpack.
 
 ---
+
+## ⚠️ Known Limitations
+
+- **Pre-Generated Chunks**: The compass searches for structures that generate naturally with the world. It works best in already-generated chunks; if you explore a completely new area, you might need to right-click again.
+- **Overworld Only**: The compasses are designed to track Overworld structures and will not function in the Nether or the End dimensions.
+
+---
+
+## 🧪 Performance Notes
+
+- **Search Time**: Typically 100-500ms depending on world size
+- **Server Impact**: Minimal (<0.5ms per tick)
+- **Memory Usage**: ~5KB per active compass
+
+---
+
 
 ## ❓ FAQ
 
@@ -176,21 +204,7 @@ No structures found within <radius> blocks (<samples>)
 
 ---
 
-## 📄 License
-
-This mod is licensed under the [MIT License](LICENSE). Feel free to include it in your modpacks!
-
-## 👤 Author
-
-**Franchino961** — [GitHub](https://github.com/Franchino961-Mod)
-
-## 🤝 Contributing
-
-Contributions are welcome!
-- Open an [Issue](../../issues) to report bugs or suggest features
-- Open a [Pull Request](../../pulls) to contribute code
-
-## 💬 Support
+## 💬 Support & Feedback
 
 If you encounter issues or bugs, please report them with:
 - Mod version
@@ -198,6 +212,28 @@ If you encounter issues or bugs, please report them with:
 - Detailed description of the problem
 - Crash logs (if applicable)
 - [Open an Issue](../../issues)
+
+---
+
+## 📄 License
+
+This mod is licensed under the [MIT License](LICENSE). Feel free to include it in your modpacks!
+
+---
+
+## 👤 Author
+
+**Franchino961** — [GitHub](https://github.com/Franchino961-Mod)
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome!
+- Open an [Issue](../../issues) to report bugs or suggest features
+- Open a [Pull Request](../../pulls) to contribute code
+
+---
 
 ## 🙏 Credits
 
@@ -219,12 +255,6 @@ If you encounter issues or bugs, please report them with:
 - [Cobblemon](https://cobblemon.com) - Required mod
 - [Fabric](https://fabricmc.net/)
 - [Fabric API](https://modrinth.com/mod/fabric-api)
-
----
-
-## 📝 Changelog
-
-See [CHANGELOG.en.md](Docs/CHANGELOG.en.md) for full version history.
 
 ---
 

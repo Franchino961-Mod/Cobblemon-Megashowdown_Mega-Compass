@@ -1,0 +1,27 @@
+{
+  "type": "crafting_shaped",
+  "group": "tools",
+  "pattern": [
+    "IAI",
+    "GCG",
+    "IAI"
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "A": {
+      "item": "minecraft:amethyst_shard"
+    },
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "C": {
+      "item": "minecraft:compass"
+    }
+  },
+  "result": {
+    "id": "mega_compass:archaeological_compass",
+    "count": 1
+  }
+}

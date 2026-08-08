@@ -1,6 +1,6 @@
 {
   "parent": "mega_compass:item/compass_base_preset",
   "textures": {
-    "texture": "mega_compass:item/megaroid_compass"
+    "texture": "minecraft:block/obsidian"
   }
 }

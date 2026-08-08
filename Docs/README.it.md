@@ -1,10 +1,10 @@
 # 🧭 Mega Bussola
 **Localizza le Strutture di MegaShowdown con Facilità!**
 
-[![Download on CurseForge](https://img.shields.io/badge/Download_on-CurseForge-orange?style=for-the-badge&logo=curseforge)](https://www.curseforge.com/minecraft/mc-mods/cobblemon-mega-showdown-meteorite-compass)
+[![Scarica su CurseForge](https://img.shields.io/badge/Scarica_su-CurseForge-orange?style=for-the-badge&logo=curseforge)](https://www.curseforge.com/minecraft/mc-mods/cobblemon-mega-showdown-meteorite-compass)
 
 [![Minecraft](https://img.shields.io/badge/Minecraft-1.21.1-green.svg)](https://www.minecraft.net/)
-[![Versione](https://img.shields.io/badge/versione-2.0.0-blue.svg)]()
+[![Versione](https://img.shields.io/badge/versione-1.0.0-blue.svg)]()
 [![Fabric](https://img.shields.io/badge/Fabric-0.17.2-blue.svg)](https://fabricmc.net/)
 [![Licenza](https://img.shields.io/badge/Licenza-MIT-yellow.svg)](../LICENSE)
 
@@ -21,7 +21,15 @@
 
 Stanco di scavare a caso sperando di trovare meteoriti o la Wishing Weald? Questa mod aggiunge **4 bussole distinte** che **puntano direttamente alla struttura più vicina**, complete di aghi che si animano fluidamente, rendendo l'esplorazione mirata e gratificante.
 
-### ✨ Caratteristiche Principali
+## 🌟 Perché usare Mega Bussola?
+
+- **Esplorazione Efficiente**: Niente più ricerche a caso per migliaia di blocchi nella speranza di imbatterti in strutture sotterranee profonde.
+- **Navigazione Chiara e Fluida**: Include aghi 3D con animazioni fluide e indicatori HUD in tempo reale che mostrano la direzione e la distanza esatte.
+- **Prestazioni del Server Ottimizzate**: Utilizza un algoritmo di ricerca asincrono ottimizzato in background, mantenendo stabili i TPS del server.
+
+---
+
+## ✨ Funzionalità Principali
 
 - 🧭 **Navigazione Intelligente**: Punta al Megaroid, Mega Site o Wishing Weald più vicino.
 - 🎯 **Quattro Tipi di Bussole**: Bussole dedicate per ogni tipo di struttura, più una Mega Bussola Combinata che ti permette di scegliere il bersaglio tramite una GUI intuitiva.
@@ -34,7 +42,7 @@ Stanco di scavare a caso sperando di trovare meteoriti o la Wishing Weald? Quest
 
 ---
 
-## 🎮 Come Funziona
+## 🚀 Guida Rapida
 
 ### Craftare le Bussole
 
@@ -84,22 +92,6 @@ Questa mod può localizzare tre tipi importantissimi di strutture da CobblemonMe
 
 ---
 
-## 📦 Installazione
-
-### Requisiti
-- **Minecraft**: 1.21.1
-- **Fabric Loader**: 0.17.2 o superiore
-- **Fabric API**: 0.116.11 o superiore
-- **CobblemonMegaShowdown**: Ultima versione
-- **Java**: 21 o superiore
-
-### Passaggi
-1. Scarica e installa [Fabric Loader](https://fabricmc.net/use/)
-2. Scarica [Fabric API](https://modrinth.com/mod/fabric-api)
-3. Scarica [CobblemonMegaShowdown](https://www.curseforge.com/minecraft/mc-mods/cobblemon-megashowdown)
-4. Posiziona `mega_showdown-mega-compass-fabric-mc1.21.1-2.0.0.jar` nella tua cartella `mods`
-5. Avvia Minecraft e divertiti!
-
 ## ⚙️ Configurazione
 
 > 📋 Un sistema di configurazione JSON completo è pianificato per una versione futura.
@@ -136,6 +128,55 @@ Nessuna struttura trovata entro <raggio> blocchi (<campioni>)
 
 ---
 
+## 📦 Requisiti
+
+- **Minecraft**: 1.21.1
+- **Fabric Loader**: 0.17.2 o superiore
+- **Fabric API**: 0.116.11 o superiore
+- **CobblemonMegaShowdown**: Ultima versione
+- **Java**: 21 o superiore
+
+---
+
+## 📥 Installazione
+
+1. Scarica e installa [Fabric Loader](https://fabricmc.net/use/)
+2. Scarica [Fabric API](https://modrinth.com/mod/fabric-api)
+3. Scarica [CobblemonMegaShowdown](https://www.curseforge.com/minecraft/mc-mods/cobblemon-megashowdown)
+4. Posiziona `mega_showdown-mega-compass-fabric-mc1.21.1-1.0.0.jar` nella tua cartella `mods`
+5. Avvia Minecraft e divertiti!
+
+---
+
+## 🖥️ Comportamento Client/Server
+
+- **Server**: Richiesto. Esegue gli algoritmi di ricerca asincroni, traccia le coordinate delle strutture e gestisce i thread di ricerca.
+- **Client**: Richiesto. Gestisce il rendering degli aghi delle bussole 3D, l'interfaccia grafica (GUI) di selezione e aggiorna l'HUD di ricerca.
+
+---
+
+## 🤝 Compatibilità
+
+### Testato Con
+- ✅ **CobblemonMegaShowdown**: Integrazione completa
+- ✅ **JEI/REI/EMI**: Visualizzazione delle ricette supportata
+- ✅ **Cobblemon**: Funziona in parallelo
+- ✅ **Fabric API**: Compatibilità completa
+- ✅ **Architectury API**: Supporto multi-loader
+
+### Note di Compatibilità
+- Funziona sia in Singleplayer che Multiplayer.
+- **Modpack**: Sei libero di includere e distribuire questa mod in qualsiasi modpack.
+
+---
+
+## ⚠️ Limitazioni Note
+
+- **Chunk Pre-generati**: Le bussole cercano strutture generate naturalmente nel mondo. Funzionano al meglio nei chunk già generati; se esplori aree nuove, potresti dover ripetere la ricerca.
+- **Solo Overworld**: Le bussole sono progettate solo per tracciare le strutture dell'Overworld e non funzioneranno nelle dimensioni del Nether o dell'End.
+
+---
+
 ## 🧪 Note sulle Performance
 
 - **Tempo Ricerca**: Tipicamente 100-500ms a seconda della dimensione del mondo
@@ -144,21 +185,6 @@ Nessuna struttura trovata entro <raggio> blocchi (<campioni>)
 
 ---
 
-## 🤝 Compatibilità
-
-### Testato Con
-- ✅ **CobblemonMegaShowdown**: Integrazione completa
-- ✅ **JEI/REI/EMI**: Supporto visualizzazione ricette
-- ✅ **Cobblemon**: Funziona insieme
-- ✅ **Fabric API**: Compatibilità completa
-- ✅ **Architectury API**: Supporto multi-loader
-
-### Problemi Noti
-- Le bussole trovano strutture solo in **chunk già generati in precedenza**.
-- Se nessuna struttura viene trovata, cammina verso orizzonti inesplorati per forzare il gioco a generare nuovi chunk, poi risetta la bussola e riprova.
-- Funziona solo nella dimensione **Overworld**.
-
----
 
 ## ❓ FAQ
 
@@ -176,21 +202,7 @@ Nessuna struttura trovata entro <raggio> blocchi (<campioni>)
 
 ---
 
-## 📄 Licenza
-
-Questa mod è rilasciata sotto la [Licenza MIT](../LICENSE). Sentiti libero di includerla nei tuoi modpack!
-
-## 👤 Autore
-
-**Franchino961** — [GitHub](https://github.com/Franchino961-Mod)
-
-## 🤝 Contributi
-
-Contributi benvenuti!
-- Apri una [Issue](../../issues) per segnalare bug o suggerire funzionalità
-- Apri una [Pull Request](../../pulls) per contribuire al codice
-
-## 💬 Supporto
+## 💬 Supporto e Feedback
 
 Se riscontri problemi o bug, segnalali includendo:
 - Versione della mod
@@ -198,6 +210,28 @@ Se riscontri problemi o bug, segnalali includendo:
 - Descrizione dettagliata del problema
 - Log di crash (se applicabili)
 - [Apri una Issue](../../issues)
+
+---
+
+## 📄 Licenza
+
+Questa mod è rilasciata sotto la [Licenza MIT](../LICENSE). Sentiti libero di includerla nei tuoi modpack!
+
+---
+
+## 👤 Autore
+
+**Franchino961** — [GitHub](https://github.com/Franchino961-Mod)
+
+---
+
+## 🤝 Contribuire
+
+Contributi benvenuti!
+- Apri una [Issue](../../issues) per segnalare bug o suggerire funzionalità
+- Apri una [Pull Request](../../pulls) per contribuire al codice
+
+---
 
 ## 🙏 Crediti
 
@@ -219,12 +253,6 @@ Se riscontri problemi o bug, segnalali includendo:
 - [Cobblemon](https://cobblemon.com) - Required mod
 - [Fabric](https://fabricmc.net/)
 - [Fabric API](https://modrinth.com/mod/fabric-api)
-
----
-
-## 📝 Changelog
-
-Vedi [CHANGELOG.it.md](CHANGELOG.it.md) per la cronologia completa delle versioni.
 
 ---
 

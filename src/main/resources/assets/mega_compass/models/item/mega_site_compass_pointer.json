@@ -1,6 +1,0 @@
-{
-  "parent": "mega_compass:item/compass_pointer_preset",
-  "textures": {
-    "texture": "mega_compass:item/mega_site_compass"
-  }
-}

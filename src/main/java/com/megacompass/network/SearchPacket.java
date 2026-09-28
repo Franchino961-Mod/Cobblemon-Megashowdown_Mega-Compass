@@ -58,6 +58,11 @@ public record SearchPacket(String structureId) implements CustomPayload {
                 return;
             }
 
+            if (serverWorld.getRegistryKey() != net.minecraft.world.World.OVERWORLD) {
+                context.player().sendMessage(net.minecraft.text.Text.translatable("string.mega_compass.status.wrong_dimension").withColor(0xFF5555), true);
+                return;
+            }
+
             // Cerca in mano principale, poi in mano secondaria
             ItemStack stack = context.player().getMainHandStack();
             if (stack.isEmpty() || !(stack.getItem() instanceof MegaCompassItem)) {
@@ -65,6 +70,14 @@ public record SearchPacket(String structureId) implements CustomPayload {
             }
 
             if (!stack.isEmpty() && stack.getItem() instanceof MegaCompassItem compass) {
+                // If not the master combined compass (opensGui), enforce that targetId matches the fixed structure
+                if (!compass.opensGui() && !targetId.equals(compass.getDefaultTargetId())) {
+                    MegaCompass.LOGGER.warn("Player {} ha tentato di cercare {} con una bussola non autorizzata ({})!",
+                            context.player().getName().getString(), targetId, compass.getDefaultTargetId());
+                    return;
+                }
+
+                context.player().getItemCooldownManager().set(compass, 20);
                 compass.searchForStructure(
                         serverWorld,
                         context.player(),

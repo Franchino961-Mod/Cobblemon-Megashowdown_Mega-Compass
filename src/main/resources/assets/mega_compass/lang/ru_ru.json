@@ -23,6 +23,7 @@
     "string.mega_compass.status.searching": "Поиск %s... (%d попыток, %d блоков)",
     "string.mega_compass.status.found": "%s найден! Дистанция: %d блоков",
     "string.mega_compass.status.not_found": "Структуры не найдены в радиусе %d блоков (%d попыток)",
+    "string.mega_compass.status.wrong_dimension": "Этот компас работает только в Обычном мире",
     "string.mega_compass.distance": "Дистанция: %d блоков",
     "string.mega_compass.samples": "Попыток: %d",
     "string.mega_compass.radius": "Радиус поиска: %d блоков",

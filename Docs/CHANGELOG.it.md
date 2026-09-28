@@ -13,9 +13,12 @@ e questo progetto segue il [Semantic Versioning](https://semver.org/spec/v2.0.0.
 - **Restrizione Dimensione Overworld**: Aggiunto il blocco della ricerca nel Nether e nell'End con notifica overlay tradotta (`string.mega_compass.status.wrong_dimension`) in tutte le 8 lingue supportate.
 - **Gestione Ciclo di Vita Worker**: Registrati listener di disconnessione (`ServerPlayConnectionEvents.DISCONNECT`) e cambio dimensione (`ServerEntityWorldChangeEvents.AFTER_PLAYER_CHANGE_WORLD`) per arrestare e pulire automaticamente i worker attivi.
 - **Cooldown Anti-Spam**: Aggiunto un cooldown di 1 secondo all'avvio della ricerca per prevenire spam di pacchetti e sovraccarico di worker.
+- **Workflow di Rilascio Automatico**: Aggiunto workflow GitHub Actions (`.github/workflows/publish.yml`) per la pubblicazione automatica su CurseForge, Modrinth e GitHub Releases al push di un tag di versione (`v*`).
+- **Integrazione Mod Publish Plugin**: Integrato `me.modmuss50.mod-publish-plugin` in `build.gradle` con estrazione automatica del changelog da `Docs/CHANGELOG.en.md`.
 
 ### Modificato
 - **Aggiornamento Fabric Loader**: Aggiornata la versione di Fabric Loader a `0.18.0` in `gradle.properties` per garantire la compatibilità con le mod.
+- **Proprietà di Pubblicazione**: Aggiunti `mod_id`, `mod_name`, `curseforge_project_id` e `modrinth_project_id` in `gradle.properties`.
 - **Aggiornamento Link CurseForge**: Corretto lo slug ufficiale del progetto in `cobblemon-mega-showdown-mega-compass` in `fabric.mod.json`, `README.md` e documentazione.
 - **Allineamento Documentazione**: Allineati README e documentazione italiana per descrivere accuratamente tutte le 6 bussole e la ricetta master a 5 ingredienti.
 

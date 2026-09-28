@@ -5,6 +5,37 @@ Tutti i cambiamenti notevoli alla mod **Mega Compass** saranno documentati in qu
 Il formato è basato su [Keep a Changelog](https://keepachangelog.com/it/1.1.0/),
 e questo progetto segue il [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.1] - 2026-09-28
+
+### Aggiunto
+- **Overlay HUD di Stato in Gioco**: Aggiunto `CompassHudRenderer` (`com.megacompass.client.render.CompassHudRenderer`) per visualizzare lo stato della ricerca in tempo reale (In ricerca con campioni e raggio, Trovata con nome struttura, coordinate esatte e distanza, o Non trovata) nell'angolo in alto a sinistra dell'HUD quando si impugna una bussola.
+- **Registrazione Modelli 3D Dinamici**: Registrati i caricatori di modelli 3D baked personalizzati tramite `ModelLoadingPlugin` di Fabric in `MegaCompassClient` per tutte le varianti di bussola.
+- **Restrizione Dimensione Overworld**: Aggiunto il blocco della ricerca nel Nether e nell'End con notifica overlay tradotta (`string.mega_compass.status.wrong_dimension`) in tutte le 8 lingue supportate.
+- **Gestione Ciclo di Vita Worker**: Registrati listener di disconnessione (`ServerPlayConnectionEvents.DISCONNECT`) e cambio dimensione (`ServerEntityWorldChangeEvents.AFTER_PLAYER_CHANGE_WORLD`) per arrestare e pulire automaticamente i worker attivi.
+- **Cooldown Anti-Spam**: Aggiunto un cooldown di 1 secondo all'avvio della ricerca per prevenire spam di pacchetti e sovraccarico di worker.
+
+### Modificato
+- **Aggiornamento Fabric Loader**: Aggiornata la versione di Fabric Loader a `0.18.0` in `gradle.properties` per garantire la compatibilità con le mod.
+- **Aggiornamento Link CurseForge**: Corretto lo slug ufficiale del progetto in `cobblemon-mega-showdown-mega-compass` in `fabric.mod.json`, `README.md` e documentazione.
+- **Allineamento Documentazione**: Allineati README e documentazione italiana per descrivere accuratamente tutte le 6 bussole e la ricetta master a 5 ingredienti.
+
+### Corretto
+- **Time Budget Tick Server & Gestione Eccezioni**: Corretto il calcolo del tempo residuo in `WorldWorkerManager` con controlli sicuri e gestione eccezioni per prevenire cali di TPS o crash del server tick.
+- **Risoluzione Dinamica ItemStack**: Risolto il leak di memoria e la mancata sincronizzazione degli item aggiornando dinamicamente l'oggetto tenuto in mano dal giocatore alla conclusione della ricerca (`StructureSearchWorker.getActiveCompassStack()`).
+- **Sincronizzazione Campioni HUD**: Risolto il conteggio campioni bloccato a 0 durante la ricerca sincronizzando `SAMPLES_COMPONENT` ad ogni avanzamento del raggio.
+- **Rotazione Ago per Dimensione**: Risolto il puntamento errato dell'ago 3D quando ci si trova in dimensioni diverse dall'Overworld.
+
+### Sicurezza
+- **Validazione Target Payload C2S**: Risolta vulnerabilità in `SearchPacket` che consentiva di manipolare il bersaglio di strutture su bussole a bersaglio fisso.
+
+### Prestazioni
+- **Render Loop 3D a Zero Allocazioni**: Eliminate le allocazioni `Quaternionf` e `Vector3f` per quad in `MegaCompassBakedModel`, sostituite con trasformazioni trigonometriche dirette inline.
+
+### Rimosso
+- **File di Backup Residui**: Rimossi i file `.bak` obsoleti (`icon.png.bak`, `compass_base_preset.json.bak`) dalle risorse di produzione.
+
+---
+
 ## [1.1.0] - 2026-08-08
 
 ### Aggiunto

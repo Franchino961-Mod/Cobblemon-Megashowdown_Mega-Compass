@@ -38,6 +38,14 @@ public class MegaCompassItem extends Item {
         this.opensGui = opensGui;
     }
 
+    public Identifier getDefaultTargetId() {
+        return defaultTargetId;
+    }
+
+    public boolean opensGui() {
+        return opensGui;
+    }
+
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
         ItemStack stack = player.getStackInHand(hand);
@@ -51,6 +59,14 @@ public class MegaCompassItem extends Item {
             return TypedActionResult.consume(stack);
         }
 
+        // Only functions in the Overworld
+        if (world.getRegistryKey() != World.OVERWORLD) {
+            if (!world.isClient()) {
+                player.sendMessage(Text.translatable("string.mega_compass.status.wrong_dimension").withColor(0xFF5555), true);
+            }
+            return TypedActionResult.fail(stack);
+        }
+
         if (opensGui) {
             // Bussola combinata: apre la GUI di selezione struttura (solo client, via callback)
             if (world.isClient() && screenOpener != null) {
@@ -61,6 +77,7 @@ public class MegaCompassItem extends Item {
 
         // Bussole dirette: avvia la ricerca immediatamente sul server, senza GUI
         if (!world.isClient() && defaultTargetId != null) {
+            player.getItemCooldownManager().set(this, 20);
             searchForStructure(world, player, player.getBlockPos(), stack, defaultTargetId);
         }
 

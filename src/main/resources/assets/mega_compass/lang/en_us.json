@@ -23,6 +23,7 @@
     "string.mega_compass.status.searching": "Searching for %s... (%d samples, %d blocks)",
     "string.mega_compass.status.found": "%s found! Distance: %d blocks",
     "string.mega_compass.status.not_found": "No structures found within %d blocks (%d samples)",
+    "string.mega_compass.status.wrong_dimension": "This compass only works in the Overworld",
     "string.mega_compass.distance": "Distance: %d blocks",
     "string.mega_compass.samples": "Samples: %d",
     "string.mega_compass.radius": "Search Radius: %d blocks",

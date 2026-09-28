@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.function.Supplier;
 
 import org.jetbrains.annotations.Nullable;
-import org.joml.Quaternionf;
-import org.joml.Vector3f;
 
 import com.megacompass.MegaCompass;
 import com.megacompass.client.MegaCompassClient;

@@ -155,6 +155,15 @@ public class MegaCompass implements ModInitializer {
 		ServerLifecycleEvents.SERVER_STOPPING.register(server -> {
 			WorldWorkerManager.clear();
 		});
+
+		// Clean up search workers when player disconnects or changes dimension
+		net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents.DISCONNECT.register((handler, server) -> {
+			WorldWorkerManager.stopWorkersForPlayer(handler.getPlayer().getUuid());
+		});
+
+		net.fabricmc.fabric.api.entity.event.v1.ServerEntityWorldChangeEvents.AFTER_PLAYER_CHANGE_WORLD.register((player, origin, destination) -> {
+			WorldWorkerManager.stopWorkersForPlayer(player.getUuid());
+		});
 	}
 
 	public static List<MegaCompassItem> getAllCompassItems() {

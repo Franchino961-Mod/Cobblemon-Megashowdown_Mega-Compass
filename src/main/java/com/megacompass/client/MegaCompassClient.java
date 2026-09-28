@@ -61,7 +61,7 @@ public class MegaCompassClient implements ClientModInitializer {
     }
 
     public static float getCompassAngle(ItemStack stack, ClientWorld world, ClientPlayerEntity player, int seed) {
-        if (world == null || player == null) {
+        if (world == null || player == null || world.getRegistryKey() != net.minecraft.world.World.OVERWORLD) {
             return 0.0f;
         }
 

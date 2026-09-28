@@ -70,8 +70,10 @@ public abstract class StructureSearchWorker<T extends StructurePlacement> implem
 	public boolean doWork() {
 		int radius = getRadius();
 		if (radius > 250 && radius / 250 > lastRadiusThreshold) {
-			if (MegaCompass.isMegaCompassItem(stack)) {
-				stack.set(MegaCompass.SEARCH_RADIUS_COMPONENT, roundRadius(radius, 250));
+			ItemStack targetStack = getActiveCompassStack();
+			if (targetStack != null) {
+				targetStack.set(MegaCompass.SEARCH_RADIUS_COMPONENT, roundRadius(radius, 250));
+				targetStack.set(MegaCompass.SAMPLES_COMPONENT, samples);
 			}
 			lastRadiusThreshold = radius / 250;
 		}
@@ -82,6 +84,19 @@ public abstract class StructureSearchWorker<T extends StructurePlacement> implem
     public UUID getOwnerUuid() {
         return playerUuid;
     }
+
+	protected ItemStack getActiveCompassStack() {
+		if (world.getServer() != null) {
+			net.minecraft.server.network.ServerPlayerEntity player = world.getServer().getPlayerManager().getPlayer(playerUuid);
+			if (player != null) {
+				ItemStack main = player.getMainHandStack();
+				if (MegaCompass.isMegaCompassItem(main)) return main;
+				ItemStack off = player.getOffHandStack();
+				if (MegaCompass.isMegaCompassItem(off)) return off;
+			}
+		}
+		return MegaCompass.isMegaCompassItem(stack) ? stack : null;
+	}
 
 	protected Pair<BlockPos, Structure> getStructureGeneratingAt(ChunkPos chunkPos) {
 		for (Structure structure : structureSet) {
@@ -103,8 +118,9 @@ public abstract class StructureSearchWorker<T extends StructurePlacement> implem
 		MegaCompass.LOGGER.info("SearchWorkerManager {}: {} succeeded with {} samples{}", 
 				managerId, getName(), samples, shouldLogRadius() ? " and " + getRadius() + " radius" : "");
 		
-		if (MegaCompass.isMegaCompassItem(stack)) {
-			((MegaCompassItem) stack.getItem()).succeed(stack, StructureUtils.getIdForStructure(world, structure),
+		ItemStack targetStack = getActiveCompassStack();
+		if (targetStack != null) {
+			((MegaCompassItem) targetStack.getItem()).succeed(targetStack, StructureUtils.getIdForStructure(world, structure),
 					pos.getX(), pos.getZ(), samples, true);
 		} else {
 			MegaCompass.LOGGER.error("SearchWorkerManager {}: {} found invalid compass after successful search", 
@@ -117,8 +133,9 @@ public abstract class StructureSearchWorker<T extends StructurePlacement> implem
 		MegaCompass.LOGGER.info("SearchWorkerManager {}: {} failed after {} samples{}", 
 				managerId, getName(), samples, shouldLogRadius() ? " and " + getRadius() + " radius" : "");
 		
-		if (MegaCompass.isMegaCompassItem(stack)) {
-			((MegaCompassItem) stack.getItem()).fail(stack, roundRadius(getRadius(), 250), samples);
+		ItemStack targetStack = getActiveCompassStack();
+		if (targetStack != null) {
+			((MegaCompassItem) targetStack.getItem()).fail(targetStack, roundRadius(getRadius(), 250), samples);
 		} else {
 			MegaCompass.LOGGER.error("SearchWorkerManager {}: {} found invalid compass after failed search", 
 					managerId, getName());

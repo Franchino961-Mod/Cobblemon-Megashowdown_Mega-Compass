@@ -13,9 +13,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Overworld Dimension Restriction**: Added dimension check blocking searches in Nether/End with translated overlay feedback (`string.mega_compass.status.wrong_dimension`) across all 8 languages.
 - **Worker Lifecycle Management**: Registered disconnect (`ServerPlayConnectionEvents.DISCONNECT`) and dimension-change (`ServerEntityWorldChangeEvents.AFTER_PLAYER_CHANGE_WORLD`) event handlers to automatically stop and clean up active search workers.
 - **Anti-Spam Cooldown**: Added a 1-second cooldown when starting searches to prevent packet and worker churn.
+- **Automated Publishing Workflow**: Added GitHub Actions CI workflow (`.github/workflows/publish.yml`) to automatically build and publish releases to CurseForge, Modrinth, and GitHub Releases on version tags (`v*`).
+- **Mod Publish Plugin Integration**: Integrated `me.modmuss50.mod-publish-plugin` in `build.gradle` with automated changelog parsing from `Docs/CHANGELOG.en.md`.
 
 ### Changed
 - **Updated Fabric Loader**: Bumped Fabric Loader dependency version to `0.18.0` in `gradle.properties` for mod compatibility.
+- **Publishing Properties Configuration**: Added `mod_id`, `mod_name`, `curseforge_project_id`, and `modrinth_project_id` to `gradle.properties`.
 - **Updated CurseForge Links**: Corrected official project slug to `cobblemon-mega-showdown-mega-compass` in `fabric.mod.json`, `README.md`, and documentation.
 - **Documentation Alignment**: Aligned README and Italian documentation to accurately describe all 6 compass variants and 5-ingredient master recipe.
 

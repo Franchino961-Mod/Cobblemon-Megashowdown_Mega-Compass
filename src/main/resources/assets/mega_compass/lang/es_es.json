@@ -23,6 +23,7 @@
     "string.mega_compass.status.searching": "Buscando %s... (%d muestras, %d bloques)",
     "string.mega_compass.status.found": "¡%s encontrado/a! Distancia: %d bloques",
     "string.mega_compass.status.not_found": "No se encontraron estructuras a menos de %d bloques (%d muestras)",
+    "string.mega_compass.status.wrong_dimension": "Esta brújula solo funciona en el Overworld",
     "string.mega_compass.distance": "Distancia: %d bloques",
     "string.mega_compass.samples": "Muestras: %d",
     "string.mega_compass.radius": "Radio de búsqueda: %d bloques",

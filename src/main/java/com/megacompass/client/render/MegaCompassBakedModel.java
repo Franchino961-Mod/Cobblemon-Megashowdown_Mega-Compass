@@ -57,17 +57,19 @@ public class MegaCompassBakedModel implements BakedModel {
             }
         }
 
-        // 3. Render Pointer con trasformazione
-        final float finalRot = rotationRads;
+        // 3. Render Pointer con trasformazione a zero-allocazioni heap
+        final float cos = (float) Math.cos(rotationRads);
+        final float sin = (float) Math.sin(rotationRads);
         context.pushTransform(quad -> {
-            Quaternionf quaternion = new Quaternionf().rotationY(finalRot);
-            Vector3f pos = new Vector3f();
             for (int i = 0; i < 4; i++) {
-                quad.copyPos(i, pos);
-                pos.add(-0.5f, -0.5f, -0.5f);
-                pos.rotate(quaternion);
-                pos.add(0.5f, 0.5f, 0.5f);
-                quad.pos(i, pos);
+                float px = quad.x(i) - 0.5f;
+                float py = quad.y(i);
+                float pz = quad.z(i) - 0.5f;
+
+                float rx = px * cos + pz * sin;
+                float rz = -px * sin + pz * cos;
+
+                quad.pos(i, rx + 0.5f, py, rz + 0.5f);
             }
             return true;
         });

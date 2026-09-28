@@ -23,6 +23,7 @@
     "string.mega_compass.status.searching": "Procurando por %s... (%d amostras, %d blocos)",
     "string.mega_compass.status.found": "%s encontrado(a)! Distância: %d blocos",
     "string.mega_compass.status.not_found": "Nenhuma estrutura encontrada em até %d blocos (%d amostras)",
+    "string.mega_compass.status.wrong_dimension": "Esta bússola só funciona no Overworld",
     "string.mega_compass.distance": "Distância: %d blocos",
     "string.mega_compass.samples": "Amostras: %d",
     "string.mega_compass.radius": "Raio de busca: %d blocos",

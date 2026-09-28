@@ -23,6 +23,7 @@
     "string.mega_compass.status.searching": "Suche nach %s... (%d Proben, %d Blöcke)",
     "string.mega_compass.status.found": "%s gefunden! Entfernung: %d Blöcke",
     "string.mega_compass.status.not_found": "Keine Strukturen im Umkreis von %d Blöcken gefunden (%d Proben)",
+    "string.mega_compass.status.wrong_dimension": "Dieser Kompass funktioniert nur in der Oberwelt",
     "string.mega_compass.distance": "Entfernung: %d Blöcke",
     "string.mega_compass.samples": "Proben: %d",
     "string.mega_compass.radius": "Suchradius: %d Blöcke",

@@ -5,6 +5,37 @@ All notable changes to the **Mega Compass** mod will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.1] - 2026-09-28
+
+### Added
+- **In-Game HUD Status Overlay**: Added `CompassHudRenderer` (`com.megacompass.client.render.CompassHudRenderer`) to render real-time compass search status (Searching with samples and radius, Found with structure name, exact coordinates, and distance, or Not Found) in the top-left HUD corner when holding a compass.
+- **Dynamic 3D Model Registration**: Registered custom 3D baked model loaders via Fabric's `ModelLoadingPlugin` in `MegaCompassClient` for all compass variants.
+- **Overworld Dimension Restriction**: Added dimension check blocking searches in Nether/End with translated overlay feedback (`string.mega_compass.status.wrong_dimension`) across all 8 languages.
+- **Worker Lifecycle Management**: Registered disconnect (`ServerPlayConnectionEvents.DISCONNECT`) and dimension-change (`ServerEntityWorldChangeEvents.AFTER_PLAYER_CHANGE_WORLD`) event handlers to automatically stop and clean up active search workers.
+- **Anti-Spam Cooldown**: Added a 1-second cooldown when starting searches to prevent packet and worker churn.
+
+### Changed
+- **Updated Fabric Loader**: Bumped Fabric Loader dependency version to `0.18.0` in `gradle.properties` for mod compatibility.
+- **Updated CurseForge Links**: Corrected official project slug to `cobblemon-mega-showdown-mega-compass` in `fabric.mod.json`, `README.md`, and documentation.
+- **Documentation Alignment**: Aligned README and Italian documentation to accurately describe all 6 compass variants and 5-ingredient master recipe.
+
+### Fixed
+- **Server Tick Starvation & Exception Safety**: Fixed tick time budgeting in `WorldWorkerManager` with safe elapsed-time checks and exception handling to prevent server lag or tick crashes.
+- **Dynamic Player ItemStack Resolution**: Fixed worker memory leak and orphan updates by resolving the player's active held item at search completion (`StructureSearchWorker.getActiveCompassStack()`).
+- **HUD Sample Count Sync**: Fixed real-time HUD samples counter being stuck at 0 during search by updating `SAMPLES_COMPONENT` alongside search radius.
+- **Dimension Needle Rotation**: Fixed 3D needle pointing to invalid coordinates when entering non-Overworld dimensions.
+
+### Security
+- **C2S Payload Target Validation**: Fixed vulnerability in `SearchPacket` to prevent unauthorized structure target modifications on single-structure compasses.
+
+### Performance
+- **Zero-Allocation 3D Render Loop**: Replaced JOML `Quaternionf` and `Vector3f` heap allocations in `MegaCompassBakedModel` with direct inline trigonometric vertex transformations.
+
+### Removed
+- **Leftover Backup Files**: Removed redundant `.bak` files (`icon.png.bak`, `compass_base_preset.json.bak`) from production resources.
+
+---
+
 ## [1.1.0] - 2026-08-08
 
 ### Added

@@ -23,6 +23,7 @@
     "string.mega_compass.status.searching": "正在搜索 %s... (%d 次采样, %d 方块)",
     "string.mega_compass.status.found": "已找到 %s！距离: %d 方块",
     "string.mega_compass.status.not_found": "在 %d 方块范围内未找到结构 (%d 次采样)",
+    "string.mega_compass.status.wrong_dimension": "该指南针仅在主世界有效",
     "string.mega_compass.distance": "距离: %d 方块",
     "string.mega_compass.samples": "采样次数: %d",
     "string.mega_compass.radius": "搜索半径: %d 方块",

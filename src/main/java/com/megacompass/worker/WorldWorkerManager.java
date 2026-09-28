@@ -26,22 +26,32 @@ public class WorldWorkerManager {
 
         index = 0;
 
-        long timeLimit = 50 - (System.currentTimeMillis() - startTime);
-        if (timeLimit < 10) {
-            timeLimit = 10;
+        // Leave safety margin for other server tasks (max 35ms from start of tick)
+        long elapsed = System.currentTimeMillis() - startTime;
+        long remainingBudget = 35 - elapsed;
+        if (remainingBudget <= 2) {
+            return;
         }
-        long endTime = System.currentTimeMillis() + timeLimit;
+
+        long endTime = System.currentTimeMillis() + remainingBudget;
 
         while (System.currentTimeMillis() < endTime) {
             IWorker task = getNext();
             if (task == null) break;
 
-            boolean again = task.doWork();
+            boolean again = false;
+            try {
+                again = task.doWork();
+            } catch (Exception e) {
+                MegaCompass.LOGGER.error("Exception in search worker, removing worker: ", e);
+                remove(task);
+                continue;
+            }
 
             if (!task.hasWork()) {
                 remove(task);
             } else if (!again) {
-                // Worker non vuole girare di nuovo questo tick, passa al prossimo
+                // Worker does not want to run again this tick, move to next
             } else {
                 index--;
             }

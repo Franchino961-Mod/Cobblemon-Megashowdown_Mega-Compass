@@ -78,22 +78,26 @@ publishMods {
     changelog = getLatestChangelog()
     type = STABLE
     
-    curseforge {
-        accessToken = providers.environmentVariable("CURSEFORGE_TOKEN")
-        projectId = project.findProperty("curseforge_project_id") ?: ""
-        minecraftVersions.add(project.minecraft_version)
-        modLoaders.add("fabric")
-        javaVersions.add(JavaVersion.VERSION_21)
-        displayName = "${project.mod_name} - ${project.mod_version}"
-        changelogType = "markdown"
-        
-        clientRequired = true
-        serverRequired = true
+    def curseToken = providers.environmentVariable("CURSEFORGE_TOKEN").orNull
+    if (curseToken && !curseToken.trim().isEmpty() && project.findProperty("curseforge_project_id")) {
+        curseforge {
+            accessToken = curseToken
+            projectId = project.findProperty("curseforge_project_id")
+            minecraftVersions.add(project.minecraft_version)
+            modLoaders.add("fabric")
+            javaVersions.add(JavaVersion.VERSION_21)
+            displayName = "${project.mod_name} - ${project.mod_version}"
+            changelogType = "markdown"
+            
+            clientRequired = true
+            serverRequired = true
+        }
     }
 
-    if (project.findProperty("modrinth_project_id")) {
+    def modrinthToken = providers.environmentVariable("MODRINTH_TOKEN").orNull
+    if (modrinthToken && !modrinthToken.trim().isEmpty() && project.findProperty("modrinth_project_id")) {
         modrinth {
-            accessToken = providers.environmentVariable("MODRINTH_TOKEN")
+            accessToken = modrinthToken
             projectId = project.findProperty("modrinth_project_id")
             minecraftVersions.add(project.minecraft_version)
             modLoaders.add("fabric")
